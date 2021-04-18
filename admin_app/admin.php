@@ -54,7 +54,7 @@
         <aside id="sidebar-wrapper">
             <div class="sidebar-brand">
               <a href="#!" style="height:30px;">
-              <img src="../ladun/dasbor/img/logo_uinsu.jpg" style="width: 60px;">
+              <img src="http://localhost/bimbelku/img/logo.png" style="width: 140px;">
               </a>
             </div>
             <div class="sidebar-brand sidebar-brand-sm">
@@ -62,9 +62,16 @@
             </div>
             <ul class="sidebar-menu" style="margin-top:20px;">
               <li><a class="nav-link" @click="berandaAtc" href="#!"><i class="fas fa-home"></i><span>Dashboard</span></a></li>
-              <li><a class="nav-link" @click="pengujianAtc" href="#!"><i class="fas fa-history"></i><span>Pengujian Citra</span></a></li>
-              <li><a class="nav-link" href="#!"><i class="fas fa-history"></i><span>History Pengujian</span></a></li>
-              <li><a class="nav-link" href="#!"><i class="fas fa-lightbulb"></i><span>Tentang Aplikasi</span></a></li>
+              <li><a class="nav-link" @click="berandaAtc" href="#!"><i class="fas fa-home"></i><span>Data Pemesanan</span></a></li>
+
+              <li class="dropdown">
+                <a href="#!" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-newspaper"></i> <span>Data Master</span></a>
+                <ul class="dropdown-menu">
+                    <li><a class="nav-link" href="#!">Siswa</a></li>
+                    <li><a class="nav-link" href="#!">Guru</a></li>
+                    <li><a class="nav-link" href="#!">Kursus</a></li>
+                </ul>
+            </li>
               <li><a class="nav-link" href="../index.php"><i class="fas fa-sign-out-alt"></i> <span>LogOut</span></a></li>
           </ul>
           </aside>
@@ -82,7 +89,7 @@
 
      </div>
    </div>
-   <footer class="main-footer" id='divFooter'>Copyright &copy; Putri Rezkiyah - Prodi Ilmu Komputer, Fakultas Sains dan Teknologi, Universitas Islam Negeri Sumatera Utara </footer>
+   <footer class="main-footer" id='divFooter'>Copyright &copy; Iis Rokhmatul Khasanah</footer>
    <!-- General JS Scripts -->
 
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
