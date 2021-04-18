@@ -22,7 +22,7 @@
                 <div class="content-wrapper d-flex align-items-center auth px-0">
                     <div class="row w-100 mx-0">
                         <div class="col-lg-4 mx-auto">
-                            <div class="auth-form-light text-left py-5 px-4 px-sm-5" id="login-app">
+                            <div class="auth-form-light text-left py-5 px-4 px-sm-5" id="daftar-app">
                                 <div class="brand-logo" style='text-align:center;'>
                                     <img src="http://localhost/bimbelku/img/logo.png" alt="logo" style='width:150px; '>
                                     <h3 style="font-weight:bold;margin-top:40px;">Flash School - Registrasi User</h3>
@@ -39,17 +39,17 @@
                                                 <input class="form-control" type="password" id="txtPassword" placeholder="Password">
                                             </div>
                                             <div class="form-group">
-                                                <select class="form-control">
-                                                  <option>-- Tipe User --</option>
-                                                  <option>Siswa</option>
-                                                  <option>Guru</option>
+                                                <select class="form-control" id="txtTipeUser">
+                                                  <option value="none">-- Tipe User --</option>
+                                                  <option value="siswa">Siswa</option>
+                                                  <option value="guru">Guru</option>
                                                 </select>
                                             </div>
                                             <div id='capNotifLogin'>
 
                                             </div>
                                             <div class="mt-3">
-                                                <a id="btnMasuk" v-on:click="loginAtc" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" href="#!">Masuk</a>
+                                                <a id="btnMasuk" v-on:click="daftarAtc()" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" href="#!">Masuk</a>
                                             </div>
 
                                             <div class="mt-5 text-muted text-center">
@@ -59,7 +59,7 @@
                                             <div class="mt-2">
                                                 <div style='padding-top:12px;'>
                                                 <hr/>
-                                                    <h5 class="font-weight-light">Develop By : Iis Rokhmatul Khasanah</h5>
+                                                    <h5 class="font-weight-light">Develop By : {{developer}}</h5>
                                                     <strong></strong>
                                                 </div>
                                             </div>
@@ -89,7 +89,7 @@
             <script>
                 const server = "http://localhost/bimbelku/";
             </script>
-            <script src="ladun/js/login.js"></script>
+            <script src="ladun/daftar/daftar.js"></script>
 </body>
 
 </html>

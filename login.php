@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>SIFT - Deteksi Keaslian Citra</title>
+    <title>Login - Flash School</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" , shrink-to-fit="no">
@@ -42,7 +42,7 @@
 
                                             </div>
                                             <div class="mt-3">
-                                                <a id="btnMasuk" v-on:click="loginAtc" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" href="#!">Masuk</a>
+                                                <a id="btnMasuk" v-on:click="loginAtc()" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" href="#!">Masuk</a>
                                             </div>
 
                                             <div class="mt-5 text-muted text-center">
@@ -52,7 +52,7 @@
                                             <div class="mt-2">
                                                 <div style='padding-top:12px;'>
                                                 <hr/>
-                                                    <h5 class="font-weight-light">Develop By : Iis Rokhmatul Khasanah</h5>
+                                                    <h5 class="font-weight-light">Develop By :{{developer}}</h5>
                                                     <strong></strong>
                                                 </div>
                                             </div>
@@ -82,7 +82,7 @@
             <script>
                 const server = "http://localhost/bimbelku/";
             </script>
-            <script src="ladun/js/login.js"></script>
+            <script src="ladun/login/login.js"></script>
 </body>
 
 </html>
