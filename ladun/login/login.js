@@ -10,7 +10,26 @@ var loginApp = new Vue({
     methods : {
         loginAtc : function()
         {
-            console.log("halo");
+            let username = document.querySelector("#txtUsername").value;
+            let password = document.querySelector("#txtPassword").value;
+            let ds = {'username':username, 'password':password}
+            $.post(rToLogin, ds, function(data){
+                let obj = JSON.parse(data);
+                let status = obj.status;
+                let tipe_user = obj.tipe_user;
+                if(status === 'user_tidak_ada'){
+                    pesanUmumApp('warning', 'Gagal login!!!', 'Username & password salah !!!');
+                }else{
+                    if(tipe_user === 'siswa'){
+
+                    }else if(tipe_user === 'guru'){
+
+                    }else{
+                        window.location.assign('admin_app/admin.php');
+                    }
+                }
+                console.log(obj);
+            });
         }
     }
 });

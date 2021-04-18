@@ -52,7 +52,7 @@
                                             <div class="mt-2">
                                                 <div style='padding-top:12px;'>
                                                 <hr/>
-                                                    <h5 class="font-weight-light">Develop By :{{developer}}</h5>
+                                                    <h5 class="font-weight-light">Develop By : {{developer}}</h5>
                                                     <strong></strong>
                                                 </div>
                                             </div>
