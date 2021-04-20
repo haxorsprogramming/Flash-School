@@ -21,13 +21,14 @@ include('../config/db.php');
                         $qKursus = $link -> query("SELECT * FROM tbl_kursus;");
                         while($fKursus = $qKursus -> fetch_assoc())
                         {
+                            $kdKursus = $fKursus['kd_kursus'];
                             $namaKursus= $fKursus['nama_kursus'];
                             $kategori = $fKursus['kategori'];
                         ?>
                         <tr>
                             <td><?=$namaKursus; ?></td>
                             <td><?=$kategori; ?></td>
-                            <td><a href="#!" class="btn btn-warning">Hapus</a></td>
+                            <td><a href="#!" @click="hapusKursusAtc('<?=$kdKursus; ?>')" class="btn btn-warning">Hapus</a></td>
                         </tr>
                         <?php } ?>
                 </tbody>
@@ -92,11 +93,36 @@ var divKursus = new Vue({
         kembaliAtc : function()
         {
             renderMenu('kursus.php');
+        },
+        hapusKursusAtc : function(kdKursus)
+        {
+            konfirmasiHapus(kdKursus);
         }
     }
 });
 
 $('#divTambahKursus').hide();
 $('#tbl_kursus').dataTable();
+
+function konfirmasiHapus(kdKursus)
+{
+    Swal.fire({
+        title: "Hapus kursus?",
+        text: "Yakin menghapus ini kursus ... ?",
+        icon: "info",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Ya",
+        cancelButtonText: "Tidak",
+      }).then((result) => {
+        if (result.value) {
+           $.post('proses-hapus-kursus.php', {'kdKursus':kdKursus}, function(data){
+                pesanUmumApp('success', 'Sukses', 'Berhasil menghapus kursus..');
+                renderMenu('kursus.php');
+           });
+        }
+      });
+}
 
 </script>

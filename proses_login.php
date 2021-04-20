@@ -20,7 +20,8 @@ if($jlhUser == 0){
     $fUser = $qUser -> fetch_assoc();
     $tipe_user = $fUser['tipe_user'];
     $dr -> tipe_user = $tipe_user;
-    $dr -> status = 'user_ada';
+    $dr -> status = "user_ada";
+    $_SESSION["user_login"] = $username;
     $update = $link -> query("UPDATE tbl_user SET last_login='$waktu' WHERE username='$username';");
 }
 

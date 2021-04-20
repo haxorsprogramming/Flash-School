@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
  <html lang="en">
  <head>
@@ -41,7 +44,7 @@
 
            <li class="dropdown"><a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
              <img alt="image" src="../ladun/dasbor/img/avatar-1.png" class="rounded-circle mr-1">
-             <div class="d-sm-none d-lg-inline-block">Hi, {{ ip_address }}</div></a>
+             <div class="d-sm-none d-lg-inline-block">Hi, <?=$_SESSION["user_login"]; ?> - Administrator Website</div></a>
              <div class="dropdown-menu dropdown-menu-right">
                <a href="#!" id='btnLogOutTop' class="dropdown-item has-icon text-danger">
                  <i class="fas fa-sign-out-alt"></i> Logout
@@ -68,7 +71,7 @@
                 <a href="#!" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-newspaper"></i> <span>Data Master</span></a>
                 <ul class="dropdown-menu">
                     <li><a class="nav-link" href="#!">Siswa</a></li>
-                    <li><a class="nav-link" href="#!">Guru</a></li>
+                    <li><a @click="guruAtc()" class="nav-link" href="#!">Guru</a></li>
                     <li><a @click="kursusAtc()" class="nav-link" href="#!">Kursus</a></li>
                 </ul>
             </li>

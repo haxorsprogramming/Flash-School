@@ -16,11 +16,18 @@ var divMenu = new Vue({
     methods : {
         berandaAtc : function()
         {
+            divMain.titleApps = "Beranda";
             renderMenu('beranda.php');
         },
         kursusAtc : function()
         {
+            divMain.titleApps = "Manajemen Kursus";
             renderMenu('kursus.php');
+        },
+        guruAtc : function()
+        {
+            divMain.titleApps = "Manajemen Guru";
+            renderMenu('guru.php');
         }
     }
 });
