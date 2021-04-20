@@ -18,6 +18,11 @@ var divMenu = new Vue({
         {
             divMain.titleApps = "Beranda";
             renderMenu('beranda.php');
+        },
+        profileAtc : function()
+        {
+            divMain.titleApps = "Profile Guru";
+            renderMenu('profil-guru.php');
         }
     }
 });
