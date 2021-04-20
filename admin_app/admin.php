@@ -43,7 +43,7 @@
              <img alt="image" src="../ladun/dasbor/img/avatar-1.png" class="rounded-circle mr-1">
              <div class="d-sm-none d-lg-inline-block">Hi, {{ ip_address }}</div></a>
              <div class="dropdown-menu dropdown-menu-right">
-               <a href="{{ BASE_URL }}" id='btnLogOutTop' class="dropdown-item has-icon text-danger">
+               <a href="#!" id='btnLogOutTop' class="dropdown-item has-icon text-danger">
                  <i class="fas fa-sign-out-alt"></i> Logout
                </a>
              </div>
@@ -61,15 +61,15 @@
               <a href="#!"></a>
             </div>
             <ul class="sidebar-menu" style="margin-top:20px;">
-              <li><a class="nav-link" @click="berandaAtc" href="#!"><i class="fas fa-home"></i><span>Dashboard</span></a></li>
-              <li><a class="nav-link" @click="berandaAtc" href="#!"><i class="fas fa-home"></i><span>Data Pemesanan</span></a></li>
+              <li><a class="nav-link" @click="berandaAtc()" href="#!"><i class="fas fa-home"></i><span>Dashboard</span></a></li>
+              <li><a class="nav-link" href="#!"><i class="fas fa-home"></i><span>Data Pemesanan</span></a></li>
 
               <li class="dropdown">
                 <a href="#!" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-newspaper"></i> <span>Data Master</span></a>
                 <ul class="dropdown-menu">
                     <li><a class="nav-link" href="#!">Siswa</a></li>
                     <li><a class="nav-link" href="#!">Guru</a></li>
-                    <li><a class="nav-link" href="#!">Kursus</a></li>
+                    <li><a @click="kursusAtc()" class="nav-link" href="#!">Kursus</a></li>
                 </ul>
             </li>
               <li><a class="nav-link" href="../index.php"><i class="fas fa-sign-out-alt"></i> <span>LogOut</span></a></li>
@@ -81,7 +81,7 @@
        <div class="main-content" id="divMain">
          <section class="section">
            <div class="section-header">
-             <h1 id="capUtama"> Flash School - [[ titleApps ]] </h1>
+             <h1 id="capUtama"> Flash School - {{ titleApps }}</h1>
            </div>
 
             <div id="divUtama"></div>
@@ -91,7 +91,7 @@
    </div>
    <footer class="main-footer" id='divFooter'>Copyright &copy; Iis Rokhmatul Khasanah</footer>
    <!-- General JS Scripts -->
-
+   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
    <script src="../ladun/dasbor/stisla/js/popper.js"></script>
    <script src="../ladun/dasbor/stisla/js/bootstrap.min.js"></script>
