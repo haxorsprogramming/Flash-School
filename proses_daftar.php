@@ -17,6 +17,13 @@ $jlhUser = mysqli_num_rows($qCekUser);
 
 if($jlhUser == 0){
     $link -> query("INSERT INTO tbl_user VALUES(null, '$username','$password','$tipeUser','$waktu');");
+    if($tipeUser == 'siswa'){
+        $link -> query("INSERT INTO tbl_siswa VALUES(null, '$username','-','','-','-','-');");
+    }elseif($tipeUser == 'guru'){
+        $link -> query("INSERT INTO tbl_guru VALUES(null, '$username','-','-','-','','-','-');");
+    }else{
+
+    }
     $dr -> status = 'sukses';
 }else{
     $dr -> status = 'user_ada';
