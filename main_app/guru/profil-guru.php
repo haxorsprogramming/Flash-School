@@ -31,13 +31,10 @@ $tanggalBaru = date("Y-m-d", strtotime($tanggalLahir));
                     <div class="slash"></div> Web Developer
                 </div>
             </div>
-            Ujang maman is a superhero name in <b>Indonesia</b>, especially in my family. He is not a fictional character but an original hero in my family, a hero for his children and for his wife. So, I use the name as a user in this template. Not a tribute, I'm just bored with <b>'John Doe'</b>.
-        </div>
-        <div class="container">
-            <a href="#!" class="btn btn-primary" @click="editProfileAtc()">Edit Profil</a>
+            <?=$fGuru['tentang_saya']; ?>
+            <br/><a href="#!" class="btn btn-primary" @click="editProfileAtc()">Edit Profil</a>
         </div>
         <hr />
-        
     </div>
     <div class="container" id="divEditProfil">
             <div class="row">
@@ -63,8 +60,12 @@ $tanggalBaru = date("Y-m-d", strtotime($tanggalLahir));
                         <input type="text" class="form-control" id="txtNoHp" placeholder="Nomor Handphone" value="<?=$fGuru['no_hp']; ?>">
                     </div>
                     <div class="form-group">
+                        <label>Alamat</label>
+                        <textarea class="form-control" style="resize: none;height:100px;" id="txtAlamat"><?=$fGuru['alamat']; ?></textarea>
+                    </div>
+                    <div class="form-group">
                         <label>Tentang Saya</label>
-                        <textarea class="form-control" style="resize: none;height:100px;" id="txtTentangSaya" value="<?=$fGuru['tentang_saya']; ?>"></textarea>
+                        <textarea class="form-control" style="resize: none;height:100px;" id="txtTentangSaya"><?=$fGuru['tentang_saya']; ?></textarea>
                     </div>
                     <div class="form-group">
                         <a href="#!" class="btn btn-primary btn-lg" @click="simpanProfileAtc()">Simpan Profile</a>
@@ -103,16 +104,18 @@ var divProfil = new Vue({
             var tempatLahir = document.querySelector("#txtTempatLahir").value;;
             var tanggalLahir = document.querySelector("#txtTanggalLahir").value;
             var noHp = document.querySelector("#txtNoHp").value;
+            var alamat = document.querySelector("#txtAlamat").value;
             var tentangSaya = document.querySelector("#txtTentangSaya").value;
             if(divProfil.statusGantiFoto === false){
                 var imgProfil = "";
             }else{
                 var imgProfil = document.querySelector("#txtFoto").getAttribute("src");
             }
-            var ds = {'nama':namaLengkap, 'nip':nip, 'tempatLahir':tempatLahir, 'tanggalLahir':tanggalLahir, 'noHp':noHp, 'tentangSaya':tentangSaya, 'imgProfil':imgProfil}
+            var ds = {'nama':namaLengkap, 'alamat':alamat, 'nip':nip, 'tempatLahir':tempatLahir, 'tanggalLahir':tanggalLahir, 'noHp':noHp, 'tentangSaya':tentangSaya, 'imgProfil':imgProfil}
             console.log(ds);
             $.post('proses-update-profile.php', ds, function(data){
-
+                pesanUmumApp('success', 'Sukses', 'Berhasil mengupdate profil');
+                renderMenu('profil-guru.php');
             });
         }
     }
@@ -132,5 +135,15 @@ function getImg()
 }
 
 $('#divEditProfil').hide();
+
+function pesanUmumApp(icon, title, text)
+{
+  Swal.fire({
+    icon : icon,
+    title : title,
+    text : text
+  });
+}
+  
 
 </script>
