@@ -5,6 +5,10 @@ $daerah = $_GET['daerah'];
 $kdKursus = $_GET['kursus'];
 $qDaerah = $link->query("SELECT * FROM tbl_tentor WHERE daerah_layanan LIKE '%$daerah%' AND kd_kursus='$kdKursus';");
 $totalTentor = mysqli_num_rows($qDaerah);
+
+$qKursusData = $link -> query("SELECT * FROM tbl_kursus WHERE kd_kursus='$kdKursus' LIMIT 0,1;");
+$fKursus = $qKursusData -> fetch_assoc();
+$namaKursus = $fKursus['nama_kursus'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -17,7 +21,7 @@ $totalTentor = mysqli_num_rows($qDaerah);
     <meta name="keywords" content="free website templates, free bootstrap themes, free template, free bootstrap, free website template">
 
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans|Candal|Alegreya+Sans">
-    <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://demo.getstisla.com/assets/modules/fontawesome/css/all.min.css">
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/imagehover.min.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
@@ -59,12 +63,15 @@ $totalTentor = mysqli_num_rows($qDaerah);
 
     <div class="container">
         <div style="margin-top:40px;text-align:left;">
-            <h3>Hasil pencarian tentor (<?= $daerah; ?>)</h3>
+            <h3>Hasil pencarian tentor </h3>
+            <h4>Daerah : <?= $daerah; ?></h4>
+            <h4>Kursus : <?=$namaKursus; ?></h4>
             <h5>Ditemukan total <?=$totalTentor; ?> tentor</h5>
             <hr/>
             <?php while ($fDaerah = $qDaerah->fetch_assoc()) { ?>
             <?php
                 $username = $fDaerah['username'];
+                $kdTentor = $fDaerah['kd_tentor'];
                 $qDataGuru = $link -> query("SELECT * FROM tbl_guru WHERE username='$username' LIMIT 0,1;");
                 $fGuru = $qDataGuru -> fetch_assoc();
                 $namaGuru = $fGuru['nama_lengkap'];
@@ -76,10 +83,14 @@ $totalTentor = mysqli_num_rows($qDaerah);
                             <h4 class="ser-text"><?=$namaGuru; ?></h4><br>
                         </div>
                         <div class="text-left">
-                            <p>Bimbingan Akademik</p>
-                            <p>Matematika</p>
-                            <p>Fisika</p>
-                            <p>Kimia</p>
+                            <?php if($fDaerah['tempat'] == 'rumah'){?>
+                                <p>Tempat kursus : Rumah</p>
+                            <?php }else{ ?>
+                                <p>Tempat kursus : Tempat Kursus</p>
+                            <?php } ?>
+                            <p>Harga / Jam : Rp. <?=number_format($fDaerah['harga']); ?></p>
+                            <p>Bio : <?=$fDaerah['latar_belakang']; ?></p>
+                            <p><a href="pesan-tentor.php?kd_tentor=<?=$kdTentor; ?>" class="btn btn-primary"><i class="fas fa-check-circle"></i> Pesan</a></p>
                         </div>
                     </div>
                 </div>

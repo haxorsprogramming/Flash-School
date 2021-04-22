@@ -105,7 +105,6 @@ $qKursus = $link -> query("SELECT * FROM tbl_kursus;");
             });
         }
 
-        
         function pesanUmumApp(icon, title, text)
         {
         Swal.fire({

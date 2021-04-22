@@ -21,7 +21,7 @@ var loginApp = new Vue({
                     pesanUmumApp('warning', 'Gagal login!!!', 'Username & password salah !!!');
                 }else{
                     if(tipe_user === 'siswa'){
-                        window.location.assign('main_app/siswa/main.php');
+                        window.location.assign('index.php');
                     }else if(tipe_user === 'guru'){
                         window.location.assign('main_app/guru/main.php');
                     }else{
