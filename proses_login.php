@@ -22,6 +22,7 @@ if($jlhUser == 0){
     $dr -> tipe_user = $tipe_user;
     $dr -> status = "user_ada";
     $_SESSION["user_login"] = $username;
+    $_SESSION["role"] = $tipe_user;
     $update = $link -> query("UPDATE tbl_user SET last_login='$waktu' WHERE username='$username';");
 }
 

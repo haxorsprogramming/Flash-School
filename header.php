@@ -1,3 +1,6 @@
+<?php 
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -31,7 +34,19 @@
         <ul class="nav navbar-nav navbar-right">
           <li><a href="#feature">Tentang Kami</a></li>
           <li><a href="#work-shop">Layanan Kami</a></li>
-          <li class="btn-trial"><a href="login.php">Sign in</a></li>
+          <?php if(isset($_SESSION['user_login'])){ ?> 
+          <?php 
+            if($_SESSION["role"] == 'guru') {
+              $pr = 'main_app/guru/main.php';
+            }else{
+              $pr = 'main_app/siswa/main.php';
+            }
+          ?>
+            <li class="btn-trial"><a href="<?=$pr; ?>">Halo <?=$_SESSION['user_login']; ?></a></li>
+          <?php } else { ?> 
+            <li class="btn-trial"><a href="login.php">Sign in</a></li>
+          <?php } ?>
+          
           <!-- <li class="btn-trial"><a href="daftar.php">Sign Up</a></li> -->
         </ul>
       </div>

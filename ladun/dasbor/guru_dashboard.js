@@ -23,6 +23,11 @@ var divMenu = new Vue({
         {
             divMain.titleApps = "Profile Guru";
             renderMenu('profil-guru.php');
+        },
+        tentoringSayaAtc : function()
+        {
+            divMain.titleApps = "Tentoring Saya";
+            renderMenu('tentoring-saya.php');
         }
     }
 });

@@ -67,7 +67,7 @@ session_start();
               <li><a class="nav-link" @click="berandaAtc()" href="#!"><i class="fas fa-home"></i><span>Dashboard</span></a></li>
               <li><a class="nav-link" @click="profileAtc()" href="#!"><i class="fas fa-home"></i><span>Profil</span></a></li>
               <li><a class="nav-link" href="#!"><i class="fas fa-home"></i><span>Data Pemesanan</span></a></li>
-              <li><a class="nav-link" href="#!"><i class="fas fa-home"></i><span>Mentoring Saya</span></a></li>
+              <li><a class="nav-link" @click="tentoringSayaAtc()" href="#!"><i class="fas fa-home"></i><span>Tentoring Saya</span></a></li>
               <li><a class="nav-link" href="logout.php"><i class="fas fa-sign-out-alt"></i> <span>LogOut</span></a></li>
           </ul>
           </aside>
@@ -96,15 +96,16 @@ session_start();
    <script src="../../ladun/dasbor/stisla/js/stisla.js"></script>
 
       <!-- JS Libraries -->
-     <script src="../../ladun/dasbor/stisla/js/datatables.min.js"></script>
-     <script src="../../ladun/dasbor/stisla/js/iziToast.min.js"></script>
-     <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
-     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-     <script src="https://s3-id-jkt-1.kilatstorage.id/ebunga/ebunga-cdn/js-lib/axios/axios.min.js"></script>
-     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-     <script src="https://s3-id-jkt-1.kilatstorage.id/ebunga/ebunga-cdn/js-lib/lottie/lottie-player.js"></script>
+      <script src="../../ladun/dasbor/stisla/js/datatables.min.js"></script>
+      <script src="../../ladun/dasbor/stisla/js/iziToast.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+      <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+      <script src="https://s3-id-jkt-1.kilatstorage.id/ebunga/ebunga-cdn/js-lib/axios/axios.min.js"></script>
+      <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+      <script src="https://s3-id-jkt-1.kilatstorage.id/ebunga/ebunga-cdn/js-lib/lottie/lottie-player.js"></script>
       <script src="../../ladun/dasbor/stisla/js/scripts.js"></script>
+      <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA1MgLuZuyqR_OGY3ob3M52N46TDBRI_9k&libraries=places"></script>
 
    <!-- Page Specific JS File -->
    <script>
