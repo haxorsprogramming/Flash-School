@@ -12,7 +12,7 @@ include("header.php");
           <div class="intro-para text-center quote" style="padding-top:180px;">
             <p class="big-text">FLASH SCHOOL</p>
             <p class="small-text">Pesan Tentor Kursus Dengan Mudah dan Cepat</p>
-            <a href="cari.php" class="btn btn-primary btn-lg">Cari tentor</a>
+            <a href="cari-tentor.php" class="btn btn-primary btn-lg">Cari tentor</a>
           </div>
           <br>
         </div>
