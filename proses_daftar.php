@@ -20,8 +20,8 @@ if($jlhUser == 0){
     if($tipeUser == 'siswa'){
         $link -> query("INSERT INTO tbl_siswa VALUES(null, '$username','-','','-','-','-');");
     }elseif($tipeUser == 'guru'){
-        $link -> query("INSERT INTO tbl_guru VALUES(null, '$username','-','-','-','','-','-','-');");
-        copy("file/img_guru/default.jpg","file/img_guru/".$username.".jpg");
+        $link -> query("INSERT INTO tbl_guru VALUES(null, '$username','-','-','-','-','-','-','-');");
+        copy("file/img_guru/default.png","file/img_guru/".$username.".png");
     }else{
 
     }

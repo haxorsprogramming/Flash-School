@@ -1,5 +1,7 @@
 <?php 
 session_start();
+include "config/db.php";
+$qKursus = $link -> query("SELECT * FROM tbl_kursus;");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -12,16 +14,11 @@ session_start();
     <meta name="keywords" content="free website templates, free bootstrap themes, free template, free bootstrap, free website template">
 
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans|Candal|Alegreya+Sans">
-    <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://demo.getstisla.com/assets/modules/fontawesome/css/all.min.css">
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/imagehover.min.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
-    <!-- =======================================================
-    Theme Name: Mentor
-    Theme URL: https://bootstrapmade.com/mentor-free-education-bootstrap-theme/
-    Author: BootstrapMade.com
-    Author URL: https://bootstrapmade.com
-  ======================================================= -->
+
 </head>
 
 <body>
@@ -61,10 +58,16 @@ session_start();
     <div class="container">
         <div style="margin-top:40px;text-align:center;">
             <h6>Masukkan nama wilayah (Kota / Kabupaten)</h6>
-            <input id="pac-input" class="form-control" type="text" placeholder="Masukkan Kota / Kabupaten" onchange="getResult()"/>
-            <img src="https://s3-id-jkt-1.kilatstorage.id/haxors-bucket/find.png" style="width: 800px;">
-            <div id="divHasilPencarian">
-
+            <input id="pac-input" class="form-control" type="text" placeholder="Masukkan Kota / Kabupaten"/>
+            <h6>Pilih jenis kursus</h6>
+            <select class="form-control" id="txtKursus">
+                <?php while($fKursus = $qKursus -> fetch_assoc()){ ?> 
+                    <option value="<?=$fKursus['kd_kursus']; ?>"><?=$fKursus['nama_kursus']; ?></option>
+                <?php } ?>
+            </select>
+            <div style="margin-top:20px;">
+                <a href="#!" class="btn btn-primary" onclick="getResult()"><i class="fas fa-search"></i> Cari tentor</a><br/>
+                <img src="file/find.png" style="width: 800px;">
             </div>
         </div>
     </div>
@@ -73,21 +76,11 @@ session_start();
     </div>
     <footer id="footer" class="footer" style="margin-top:30px;">
         <div class="container text-center">
-            <!-- End newsletter-form -->
-            <ul class="social-links">
-                <li><a href="#link"><i class="fa fa-twitter fa-fw"></i></a></li>
-                <li><a href="#link"><i class="fa fa-facebook fa-fw"></i></a></li>
-                <li><a href="#link"><i class="fa fa-google-plus fa-fw"></i></a></li>
-                <li><a href="#link"><i class="fa fa-dribbble fa-fw"></i></a></li>
-                <li><a href="#link"><i class="fa fa-linkedin fa-fw"></i></a></li>
-            </ul>
-            ©2020 Iis Rokhmatul Khasanah
-            <div class="credits">
-                Designed by <a href="https://bootstrapmade.com/">BootstrapMade.com</a>
-            </div>
+            ©2021 Iis Rokhmatul Khasanah
         </div>
     </footer>
     <script src="js/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
     <script src="js/jquery.easing.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/custom.js"></script>
@@ -99,11 +92,29 @@ session_start();
         function getResult()
         {
             let daerah = document.querySelector("#pac-input").value;
-            let ds = {'daerah':daerah}
+            let kdKursus = document.querySelector("#txtKursus").value;
+            let ds = {'daerah':daerah, 'kursus':kdKursus}
             $.post('proses-cari-tentor.php', ds, function(data){
-                console.log(data);
+                let obj = JSON.parse(data);
+                let status = obj.status;
+                if(status === 'no_area'){
+                    pesanUmumApp('success', 'No area coverage', 'Tidak ada mentor yg cocok di daerah yang anda cari..');
+                }else{
+                    window.location.assign('hasil-cari-tentor.php?daerah='+status+'&kursus='+kdKursus);
+                }
             });
         }
+
+        
+        function pesanUmumApp(icon, title, text)
+        {
+        Swal.fire({
+            icon : icon,
+            title : title,
+            text : text
+        });
+        }
+
     </script>
 </body>
 

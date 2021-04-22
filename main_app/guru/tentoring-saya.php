@@ -62,8 +62,7 @@ $qTentor = $link -> query("SELECT * FROM tbl_tentor WHERE username='$usernameLog
             <div class="form-group">
                 <label>Kursus</label>
                 <select class="form-control" id="txtKursus">
-                    <?php 
-                        while($fKursus = $qKursus -> fetch_assoc()){ ?> 
+                    <?php while($fKursus = $qKursus -> fetch_assoc()){ ?> 
                         <option value="<?=$fKursus['kd_kursus']; ?>"><?=$fKursus['nama_kursus']; ?></option>
                     <?php } ?>
                 </select>
