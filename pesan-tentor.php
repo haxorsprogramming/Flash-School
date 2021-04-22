@@ -1,7 +1,9 @@
 <?php
 session_start();
 include "config/db.php";
+// ambil data kd tentor melalui url (get)
 $kdTentor = $_GET['kd_tentor'];
+// query & fetch data tentor 
 $dataTentor = $link -> query("SELECT * FROM tbl_tentor WHERE kd_tentor='$kdTentor' LIMIT 0,1;");
 $fTentor = $dataTentor -> fetch_assoc();
 $usernameTentor = $fTentor['username'];
@@ -23,7 +25,6 @@ $namaKursus = $fKursus['nama_kursus'];
     <title>Flash School - Pesan Tentor</title>
     <meta name="description" content="Free Bootstrap Theme by BootstrapMade.com">
     <meta name="keywords" content="free website templates, free bootstrap themes, free template, free bootstrap, free website template">
-
     <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans|Candal|Alegreya+Sans">
     <link rel="stylesheet" href="https://demo.getstisla.com/assets/modules/fontawesome/css/all.min.css">
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
@@ -121,7 +122,7 @@ $namaKursus = $fKursus['nama_kursus'];
     </div>
     <footer id="footer" class="footer" style="margin-top:30px;">
         <div class="container text-center">
-            ©<?php echo date("Y");?> Iis Rokhmatul Khasanah
+            &copy;<?php echo date("Y"); ?> Iis Rokhmatul Khasanah
         </div>
     </footer>
     <script src="js/jquery.min.js"></script>
@@ -155,14 +156,16 @@ $namaKursus = $fKursus['nama_kursus'];
         $(this).addClass('disabled');
     });
 
-        function pesanUmumApp(icon, title, text) {
-            Swal.fire({
-                icon: icon,
-                title: title,
-                text: text
-            });
-        }
+    function pesanUmumApp(icon, title, text) {
+        Swal.fire({
+            icon: icon,
+            title: title,
+            text: text
+        });
+    }
+
     </script>
+
 </body>
 
 </html>

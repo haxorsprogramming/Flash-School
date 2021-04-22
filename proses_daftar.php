@@ -3,9 +3,8 @@ session_start();
 include "config/db.php";
 
 class dataRespon{}
-
 $dr = new dataRespon();
-// {'username':username, 'password':password, 'tipeUser':tipeUser}
+
 $username = $_POST['username'];
 $password = $_POST['password'];
 $tipeUser = $_POST['tipeUser'];
@@ -21,7 +20,7 @@ if($jlhUser == 0){
         $link -> query("INSERT INTO tbl_siswa VALUES(null, '$username','-','','-','-','-');");
     }elseif($tipeUser == 'guru'){
         $link -> query("INSERT INTO tbl_guru VALUES(null, '$username','-','-','-','-','-','-','-');");
-        copy("file/img_guru/default.png","file/img_guru/".$username.".png");
+        copy("file/img_guru/default.png", "file/img_guru/".$username.".png");
     }else{
 
     }
