@@ -9,7 +9,7 @@ $tanggalBaru = date("Y-m-d", strtotime($tanggalLahir));
 ?>
 <div id="divProfil">
     <div class="card profile-widget" id="divDataProfil">
-        <div class="profile-widget-header">
+        <div class="profile-widget-header" style="width: 45%;">
             <img alt="image" src="../../file/img_guru/<?=$usernameLogin; ?>.png" class="rounded-circle profile-widget-picture">
             <div class="profile-widget-items">
                 <div class="profile-widget-item">
@@ -22,6 +22,7 @@ $tanggalBaru = date("Y-m-d", strtotime($tanggalLahir));
                 </div>
             </div>
         </div>
+        <hr />
         <div class="profile-widget-description">
             <div class="profile-widget-name"><?=$fGuru['nama_lengkap']; ?> (<?=$usernameLogin; ?>) <div class="text-muted d-inline font-weight-normal">
                     <div class="slash"></div> Web Developer
@@ -30,7 +31,6 @@ $tanggalBaru = date("Y-m-d", strtotime($tanggalLahir));
             <?=$fGuru['tentang_saya']; ?>
             <br/><a href="#!" class="btn btn-primary" @click="editProfileAtc()">Edit Profil</a>
         </div>
-        <hr />
     </div>
     <div class="container" id="divEditProfil">
             <div class="row">

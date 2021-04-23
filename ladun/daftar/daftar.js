@@ -41,7 +41,7 @@ var loginApp = new Vue({
 });
 
 // inisialisasi 
-document.querySelector('#txtUsername').focus();
+document.querySelector('#txtNamaLengkap').focus();
 
 function pesanUmumApp(icon, title, text)
 {

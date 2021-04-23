@@ -56,12 +56,10 @@ $totalJam = $fPesan['total_biaya'] / $hargaPerJam;
                 <td>
                     <img src="../file/bukti_pembayaran/<?= $kdPemesanan; ?>.png" id="txtFoto" style="width: 200px;">
                     <br />
-                    <small>Upload bukti pembayaran</small>
-                    <input type="file" id="txtInputFoto" onchange="getImg()">
                 </td>
             </tr>
             <tr>
-                <td>Detail waktu mentoring</td>
+                <td><b>Detail waktu mentoring</b></td>
                 <td>
                     <?php
                     $kdAwal = 1;

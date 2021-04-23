@@ -25,7 +25,7 @@ while($fPesanan = $qPesanan -> fetch_object()){
 ?>
 <div id="divProfil">
     <div class="card profile-widget" id="divDataProfil">
-        <div class="profile-widget-header">
+        <div class="profile-widget-header" style="width: 45%;">
             <img alt="image" src="../../file/img_siswa/<?=$usernameLogin; ?>.png" class="rounded-circle profile-widget-picture">
             <div class="profile-widget-items">
                 <div class="profile-widget-item">
@@ -37,6 +37,7 @@ while($fPesanan = $qPesanan -> fetch_object()){
                     <div class="profile-widget-item-value"><?=$jlhPesanan; ?></div>
                 </div>
             </div>
+            <hr />
         </div>
         <div class="profile-widget-description">
             <div class="profile-widget-name"> <?=$namaSiswa; ?> - (<?=$usernameLogin; ?>) <div class="text-muted d-inline font-weight-normal">
@@ -45,7 +46,7 @@ while($fPesanan = $qPesanan -> fetch_object()){
             
             <br/><a href="#!" class="btn btn-primary" @click="editProfileAtc()">Edit Profil</a>
         </div>
-        <hr />
+        
     </div>
     <div class="container" id="divEditProfil">
             <div class="row">

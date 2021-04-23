@@ -20,7 +20,6 @@ $qTentor = $link -> query("SELECT * FROM tbl_tentor WHERE username='$usernameLog
                         <th>Tempat</th>
                         <th>Harga</th>
                         <th>Daerah Layanan</th>
-                        <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -38,7 +37,6 @@ $qTentor = $link -> query("SELECT * FROM tbl_tentor WHERE username='$usernameLog
                                 <td><?=$fTentor['tempat']; ?></td>
                                 <td>Rp. <?=number_format($fTentor['harga']); ?></td>
                                 <td><?=$fTentor['daerah_layanan']; ?></td>
-                                <td><a href="#!" class="btn btn-warning">Hapus</a></td>
                             </tr>
                         <?php } ?>
                 </tbody>
@@ -116,6 +114,8 @@ var mentoring = new Vue({
             console.log(ds);
             $.post('proses-tambah-tentoring.php', ds, function(data){
                 pesanUmumApp('success', 'Sukses', 'Berhasil mendaftarkan tentor ...');
+                divMain.titleApps = "Tentoring Saya";
+                renderMenu('tentoring-saya.php');
             });
         }
     }
