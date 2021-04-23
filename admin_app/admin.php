@@ -65,7 +65,7 @@ session_start();
             </div>
             <ul class="sidebar-menu" style="margin-top:20px;">
               <li><a class="nav-link" @click="berandaAtc()" href="#!"><i class="fas fa-home"></i><span>Dashboard</span></a></li>
-              <li><a class="nav-link" href="#!"><i class="fas fa-home"></i><span>Data Pemesanan</span></a></li>
+              <li><a class="nav-link" @click="dataPemesanan()" href="#!"><i class="fas fa-home"></i><span>Data Pemesanan</span></a></li>
 
               <li class="dropdown">
                 <a href="#!" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-newspaper"></i> <span>Data Master</span></a>

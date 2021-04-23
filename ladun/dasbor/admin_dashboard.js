@@ -28,6 +28,11 @@ var divMenu = new Vue({
         {
             divMain.titleApps = "Manajemen Guru";
             renderMenu('guru.php');
+        },
+        dataPemesanan : function()
+        {
+            divMain.titleApps = "Data Pemesanan";
+            renderMenu('data-pemesanan.php');
         }
     }
 });
