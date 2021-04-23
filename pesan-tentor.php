@@ -111,7 +111,7 @@ $namaKursus = $fKursus['nama_kursus'];
                                         $sb = "btn-success";
                                         $sd = "";
                                     }else{
-                                        $sb = "btn-warning";
+                                        $sb = "btn-info";
                                         $sd = "disabled"; 
                                     }
                                 ?>
@@ -209,7 +209,10 @@ $namaKursus = $fKursus['nama_kursus'];
                             });
                         }
                         pesanUmumApp('success', 'Sukses', 'Sukses melakukan pemesanan tentor ... Silahkan lakukan pembayaran di halaman berikutnya');
-                        window.location.assign('pesanan-saya.php')
+                        setTimeout(function(){
+                            window.location.assign('pesanan-saya.php');
+                        }, 3000);
+                        
                     });
                 }
             });

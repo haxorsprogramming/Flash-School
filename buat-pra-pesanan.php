@@ -24,6 +24,8 @@ $harga = $fTentor['harga'];
 
 $totalHarga = $harga * $totalJam;
 
+copy("file/bukti_pembayaran/default.png", "file/bukti_pembayaran/".$kd_pemesanan.".png");
+
 $qSimpan = "INSERT INTO tbl_pemesanan VALUES(null, '$kd_pemesanan','$kdTentor','$usernameLogin','$totalHarga','$waktu','','pending');";
 $link -> query($qSimpan);
 
