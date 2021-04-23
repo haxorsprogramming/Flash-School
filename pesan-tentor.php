@@ -54,6 +54,7 @@ $namaKursus = $fKursus['nama_kursus'];
                             $pr = 'main_app/guru/main.php';
                         } else {
                             $pr = 'main_app/siswa/main.php';
+                            echo "<li><a href='pesanan-saya.php'>Pesanan Saya</a></li>";
                         }
                         ?>
                         <li class="btn-trial"><a href="<?= $pr; ?>">Halo <?= $_SESSION['user_login']; ?></a></li>
@@ -103,14 +104,25 @@ $namaKursus = $fKursus['nama_kursus'];
                             <?php 
                                 $jam = array("08:00", "09:00", "10:00", "11:00","12:00","13:00","14:00","15:00","16:00",);
                                 for($j = 0; $j < 9; $j++){ ?>
-                                    <a href="#!" class="btn btn-success btnAdd" id="<?=$kdAwal; ?>"><?=$jam[$j]; ?></a>
+                                <?php 
+                                    $qCekTentorJadwal = $link -> query("SELECT id FROM tbl_item_pesanan WHERE kd_tentor='$kdTentor' AND kd_jadwal='$kdAwal' AND status='1';");
+                                    $totalJadwal = mysqli_num_rows($qCekTentorJadwal);
+                                    if($totalJadwal < 1){
+                                        $sb = "btn-success";
+                                        $sd = "";
+                                    }else{
+                                        $sb = "btn-warning";
+                                        $sd = "disabled"; 
+                                    }
+                                ?>
+                                    <a href="#!" class="btn <?=$sb; ?> <?=$sd;?> btnAdd" id="<?=$kdAwal; ?>"><?=$jam[$j]; ?></a>
                                 <?php $kdAwal++; } ?>
                         </td>
                     </tr>
                 <?php } ?>   
               </table>
                     <?php if (isset($_SESSION['user_login'])) { ?>
-                        <a href="#!" class="btn btn-primary">Buat pesanan</a>
+                        <a href="#!" class="btn btn-primary" onclick="prosesPraPesanan()">Buat pesanan</a>
                     <?php } else { ?>
                         Harap <a href="login.php" style="color: blue;">login</a> terlebih dahulu untuk melakukan pemesanan!!&nbsp;
                     <?php } ?>
@@ -141,6 +153,7 @@ $namaKursus = $fKursus['nama_kursus'];
     var dataJam = [];
     var hargaPerJam = "<?=$fTentor['harga']; ?>";
     var totalHarga = 0;
+    var kdTentor = "<?=$kdTentor; ?>";
 
     $(".btnAdd").click(function(){
         let jam = $(this).attr('id');
@@ -162,6 +175,46 @@ $namaKursus = $fKursus['nama_kursus'];
             title: title,
             text: text
         });
+    }
+
+    function prosesPraPesanan()
+    {
+        let totalJam = dataJam.length;
+        if(totalJam < 1){
+            pesanUmumApp('warning', 'Pilih jam', 'Harap pilih jam terlebih dahulu');
+        }else{
+            Swal.fire({
+            title: "Proses pesanan ?",
+            text: "Yakin memproses pesanan tentor ... ?",
+            icon: "info",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Ya",
+            cancelButtonText: "Tidak",
+            }).then((result) => {
+                if (result.value) {
+                    let ds = {'kdTentor':kdTentor, 'totalJam':totalJam}
+                    $.post('buat-pra-pesanan.php', ds, function(data){
+                        let obj = JSON.parse(data);
+                        let kdPemesanan = obj.kd_pemesanan;
+                        let kdTentor = obj.kd_tentor;
+                        //save to item pesanan 
+                        var i;
+                        for(i = 0; i < dataJam.length; i++){
+                            let ds = {'kdPesanan':kdPemesanan, 'kdJadwal':dataJam[i], 'kdTentor':kdTentor}
+                            $.post('update-item-pesanan.php', ds, function(data){
+                                let obj = JSON.parse(data);
+                                console.log(obj);
+                            });
+                        }
+                        pesanUmumApp('success', 'Sukses', 'Sukses melakukan pemesanan tentor ... Silahkan lakukan pembayaran di halaman berikutnya');
+                        window.location.assign('pesanan-saya.php')
+                    });
+                }
+            });
+        }
+        
     }
 
     </script>
