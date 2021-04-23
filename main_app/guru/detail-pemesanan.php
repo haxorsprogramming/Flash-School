@@ -8,6 +8,7 @@ $qPemesanan = $link->query("SELECT * FROM tbl_pemesanan WHERE kd_pemesanan='$kdP
 $fPesan = $qPemesanan->fetch_assoc();
 $kdTentor = $fPesan['kd_tentor'];
 $statusPemesanan = $fPesan['status_pembayaran'];
+$statusMentoring = $fPesan['status_mentoring'];
 // query tentor 
 $qTentor = $link->query("SELECT * FROM tbl_tentor WHERE kd_tentor='$kdTentor' LIMIT 0,1;");
 $fTentor = $qTentor->fetch_assoc();
@@ -78,7 +79,7 @@ $totalJam = $fPesan['total_biaya'] / $hargaPerJam;
                             if ($tPemesanan < 1) { ?>
 
                         <?php } else { ?>
-                            <a href="#!" class="btn btn-success disabled" id="<?= $kdAwal; ?>"><?= $jam[$j]; ?></a>
+                            <a href="#!" class="btn btn-info" id="<?= $kdAwal; ?>"><?= $jam[$j]; ?></a>
                         <?php } ?>
 
                     <?php $kdAwal++;
@@ -95,10 +96,15 @@ $totalJam = $fPesan['total_biaya'] / $hargaPerJam;
         </table>
         Aksi 
         <hr/>
-        <?php if($statusPemesanan == 'sukses'){ ?>
-            <a href="#!" class="btn btn-success" @click="selesaiAtc()">Selesai mentoring</a>
-        <?php }else{ ?>
-        
+        <?php if($statusMentoring == 'aktif'){ ?>
+            <a href="#!" class="btn btn-primary" @click="selesaiAtc()">Selesai mentoring</a>
+        <?php }elseif($statusMentoring == 'pending'){ ?>
+            <?php if($statusPemesanan == 'pending'){ ?>
+            
+            <?php }else{ ?>
+                <a href="#!" class="btn btn-primary" @click="terimaPesananAtc()">Terima pesanan</a>
+            <?php } ?>
+            
         <?php } ?>
         
         <hr />
@@ -130,8 +136,33 @@ var divDetailPemesanan = new Vue({
             cancelButtonText: "Tidak",
             }).then((result) => {
                 if (result.value) {
-                    $.post('verifikasi-selesai.php', function(data){
+                    $.post('verifikasi-selesai.php', ds, function(data){
                         pesanUmumApp('success', 'Sukses', 'Berhasil menyelesaikan pemesanan mentoring');
+                        divMain.titleApps = "Data pemesanan";
+                        renderMenu('data-pemesanan.php');
+                    });
+                }
+            });
+
+        },
+        terimaPesananAtc : function()
+        {
+            let kdPemesanan = "<?=$kdPemesanan; ?>";
+            let ds = {'kdPemesanan':kdPemesanan}
+
+            Swal.fire({
+            title: "Terima pesanan ... ?",
+            text: "Terima pesanan mentoring dari siswa ... ?",
+            icon: "info",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Ya",
+            cancelButtonText: "Tidak",
+            }).then((result) => {
+                if (result.value) {
+                    $.post('terima-pesanan.php', ds, function(data){
+                        pesanUmumApp('success', 'Sukses', 'Berhasil menerima pemesanan mentoring');
                         divMain.titleApps = "Data pemesanan";
                         renderMenu('data-pemesanan.php');
                     });

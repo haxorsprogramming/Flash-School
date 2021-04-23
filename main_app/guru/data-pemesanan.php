@@ -22,6 +22,7 @@ $usernameLogin = $_SESSION['user_login'];
                         <th>Total harga</th>
                         <th>Waktu Pemesanan</th>
                         <th>Status Pembayaran</th>
+                        <th>Status Mentoring</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -34,6 +35,7 @@ $usernameLogin = $_SESSION['user_login'];
                     $totalBiaya = $fPemesanan['total_biaya'];
                     $waktuPemesanan = $fPemesanan['waktu_pemesanan'];
                     $statusPembayaran = $fPemesanan['status_pembayaran'];
+                    $statusMentoring = $fPemesanan['status_mentoring'];
                     // query siswa 
                     $qSiswa = $link -> query("SELECT * FROM tbl_siswa WHERE username='$kdSiswa' LIMIT 0,1;");
                     $fSiswa = $qSiswa -> fetch_assoc();
@@ -64,6 +66,7 @@ $usernameLogin = $_SESSION['user_login'];
                         <td>Rp. <?=number_format($totalBiaya); ?></td>
                         <td><?=$waktuPemesanan; ?></td>
                         <td><?=$statusPembayaran; ?></td>
+                        <td><?=$statusMentoring; ?></td>
                         <td>
                             <a href="#!" class="btn btn-primary" @click="detailAtc('<?=$kdPemesanan; ?>')">Detail</a>
                         </td>
