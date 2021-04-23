@@ -31,7 +31,9 @@
                                     <h6 class="font-weight-light">Harap isi field.</h6>
                                     <div>
                                         <div class="pt-3">
-                                        
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" id="txtNamaLengkap" placeholder="Nama Lengkap">
+                                            </div>
                                             <div class="form-group">
                                                 <input type="text" class="form-control" id="txtUsername" placeholder="Username">
                                             </div>

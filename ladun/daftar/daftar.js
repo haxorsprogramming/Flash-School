@@ -10,13 +10,14 @@ var loginApp = new Vue({
     methods : {
         daftarAtc : function()
         {
+            let namaLengkap = document.querySelector("#txtNamaLengkap").value;
             let username = document.querySelector("#txtUsername").value;
             let password = document.querySelector("#txtPassword").value;
             let tipeUser = document.querySelector("#txtTipeUser").value;
             if(username === '' || password === '' || tipeUser === 'none'){
                 pesanUmumApp('warning', 'Isi field!!!', 'Harap isi semua field !!!');
             }else{
-                let ds = {'username':username, 'password':password, 'tipeUser':tipeUser}
+                let ds = {'username':username, 'password':password, 'tipeUser':tipeUser, 'namaLengkap':namaLengkap}
                 document.querySelector("#btnMasuk").classList.add('disabled');
                 $.post(rToDaftar, ds, function(data){
                     let obj = JSON.parse(data);

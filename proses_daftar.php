@@ -8,6 +8,7 @@ $dr = new dataRespon();
 $username = $_POST['username'];
 $password = $_POST['password'];
 $tipeUser = $_POST['tipeUser'];
+$namaLengkap = $_POST['namaLengkap'];
 $waktu = date("Y-m-d H:i:s");
 
 // cek apakah username sudah terdaftar 
@@ -17,9 +18,10 @@ $jlhUser = mysqli_num_rows($qCekUser);
 if($jlhUser == 0){
     $link -> query("INSERT INTO tbl_user VALUES(null, '$username','$password','$tipeUser','$waktu');");
     if($tipeUser == 'siswa'){
-        $link -> query("INSERT INTO tbl_siswa VALUES(null, '$username','-','','-','-','-');");
+        $link -> query("INSERT INTO tbl_siswa VALUES(null, '$username','$namaLengkap','','-','-','-');");
+        copy("file/img_siswa/default.png", "file/img_siswa/".$username.".png");
     }elseif($tipeUser == 'guru'){
-        $link -> query("INSERT INTO tbl_guru VALUES(null, '$username','-','-','-','-','-','-','-');");
+        $link -> query("INSERT INTO tbl_guru VALUES(null, '$username','$namaLengkap','-','-','-','-','-','-');");
         copy("file/img_guru/default.png", "file/img_guru/".$username.".png");
     }else{
 

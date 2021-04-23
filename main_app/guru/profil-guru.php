@@ -20,10 +20,6 @@ $tanggalBaru = date("Y-m-d", strtotime($tanggalLahir));
                     <div class="profile-widget-item-label">Pesanan</div>
                     <div class="profile-widget-item-value"></div>
                 </div>
-                <div class="profile-widget-item">
-                    <div class="profile-widget-item-label">Followers</div>
-                    <div class="profile-widget-item-value"></div>
-                </div>
             </div>
         </div>
         <div class="profile-widget-description">

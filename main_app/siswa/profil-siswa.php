@@ -10,6 +10,18 @@ $tempatLahir = $fSiswa -> tempat_lahir;
 $tanggalLahir = $fSiswa -> tanggal_lahir;
 $alamat = $fSiswa -> alamat;
 $noHp = $fSiswa -> no_hp;
+// cari jumlah pesanan 
+$qPesanan = $link -> query("SELECT * FROM tbl_pemesanan WHERE kd_siswa='$usernameLogin';");
+$jlhPesanan = mysqli_num_rows($qPesanan);
+// cari jadwal belajar 
+$totalJadwal = 0;
+while($fPesanan = $qPesanan -> fetch_object()){
+    $kdPemesanan = $fPesanan -> kd_pemesanan;
+    // query total jam di tabel item pesanan 
+    $qTotalPesanan = $link -> query("SELECT id FROM tbl_item_pesanan WHERE kd_pemesanan='$kdPemesanan';");
+    $totalJam = mysqli_num_rows($qTotalPesanan);
+    $totalJadwal = $totalJadwal + $totalJam;
+}
 ?>
 <div id="divProfil">
     <div class="card profile-widget" id="divDataProfil">
@@ -18,15 +30,11 @@ $noHp = $fSiswa -> no_hp;
             <div class="profile-widget-items">
                 <div class="profile-widget-item">
                     <div class="profile-widget-item-label">Jam Belajar</div>
-                    <div class="profile-widget-item-value"></div>
+                    <div class="profile-widget-item-value"><?=$totalJadwal; ?></div>
                 </div>
                 <div class="profile-widget-item">
                     <div class="profile-widget-item-label">Pesanan</div>
-                    <div class="profile-widget-item-value"></div>
-                </div>
-                <div class="profile-widget-item">
-                    <div class="profile-widget-item-label">Followers</div>
-                    <div class="profile-widget-item-value"></div>
+                    <div class="profile-widget-item-value"><?=$jlhPesanan; ?></div>
                 </div>
             </div>
         </div>
@@ -80,6 +88,8 @@ $noHp = $fSiswa -> no_hp;
 
 <script>
 
+var username = "<?=$usernameLogin; ?>";
+
 var divProfil = new Vue({
     el : '#divProfil',
     data : {
@@ -103,7 +113,7 @@ var divProfil = new Vue({
             }else{
                 var imgProfil = document.querySelector("#txtFoto").getAttribute("src");
             }
-            let ds = {'nama':namaLengkap, 'tempatLahir':tempatLahir, 'tanggalLahir':tanggalLahir, 'noHp':noHp, 'alamat':alamat}
+            let ds = {'nama':namaLengkap, 'username':username, 'tempatLahir':tempatLahir, 'tanggalLahir':tanggalLahir, 'noHp':noHp, 'alamat':alamat}
             $.post('proses-update-profil.php', ds, function(data){
                 pesanUmumApp('success', 'Sukses', 'Berhasil mengupdate profil');
                 renderMenu('profil-siswa.php');
@@ -112,7 +122,7 @@ var divProfil = new Vue({
     }
 });
 
-var username = "<?=$usernameLogin; ?>";
+
 
 $('#divEditProfil').hide();
 

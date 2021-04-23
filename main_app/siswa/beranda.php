@@ -6,7 +6,26 @@ $userLogin = $_SESSION["user_login"];
 $qUser = $link -> query("SELECT * FROM tbl_siswa WHERE username='$userLogin' LIMIT 0,1;");
 $fUser = $qUser -> fetch_assoc();
 $nama = $fUser['nama_lengkap'];
+// cari jumlah pesanan 
+$qPesanan = $link -> query("SELECT * FROM tbl_pemesanan WHERE kd_siswa='$userLogin';");
+$jlhPesanan = mysqli_num_rows($qPesanan);
+// cari jadwal belajar 
+$totalJadwal = 0;
+while($fPesanan = $qPesanan -> fetch_object()){
+    $kdPemesanan = $fPesanan -> kd_pemesanan;
+    // query total jam di tabel item pesanan 
+    $qTotalPesanan = $link -> query("SELECT id FROM tbl_item_pesanan WHERE kd_pemesanan='$kdPemesanan';");
+    $totalJam = mysqli_num_rows($qTotalPesanan);
+    $totalJadwal = $totalJadwal + $totalJam;
+}
+// cari jumlah tentor 
+$qTentor = $link -> query("SELECT id FROM tbl_tentor;");
+$jlhTentor = mysqli_num_rows($qTentor);
+// cari total siswa 
+$qSiswa = $link -> query("SELECT id FROM tbl_siswa;");
+$jlhSiswa = mysqli_num_rows($qSiswa);
 ?>
+
 <?php 
 if($nama == "-"){ ?>
     <div class="alert alert-info">Terima kasih telah melakukan pendaftaran, harap lengkapi profil kamu agar dapat menggunakan aplikasi, terima kasih. </div>
@@ -31,7 +50,7 @@ if($nama == "-"){ ?>
         </div>
         <div class="card-wrap">
           <div class="card-header">
-            <h3>5</h3>
+            <h3><?=$totalJadwal; ?></h3>
             <h4>Jadwal Belajar</h4>
           </div>
           <div class="card-body"></div>
@@ -45,7 +64,7 @@ if($nama == "-"){ ?>
         </div>
         <div class="card-wrap">
           <div class="card-header">
-            <h3>4</h3>
+            <h3><?=$jlhPesanan; ?></h3>
             <h4>Pemesanan</h4>
           </div>
           <div class="card-body"></div>
@@ -59,7 +78,7 @@ if($nama == "-"){ ?>
         </div>
         <div class="card-wrap">
           <div class="card-header">
-            <h3>5</h3>
+            <h3><?=$jlhTentor; ?></h3>
             <h4>Tentor</h4>
           </div>
           <div class="card-body"></div>
@@ -73,7 +92,7 @@ if($nama == "-"){ ?>
         </div>
         <div class="card-wrap">
           <div class="card-header">
-            <h3>1</h3>
+            <h3><?=$jlhSiswa; ?></h3>
             <h4>Siswa</h4>
           </div>
           <div class="card-body"></div>
