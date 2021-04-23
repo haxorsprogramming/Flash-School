@@ -28,6 +28,11 @@ var divMenu = new Vue({
         {
             divMain.titleApps = "Tentoring Saya";
             renderMenu('tentoring-saya.php');
+        },
+        dataPemesananAtc : function()
+        {
+            divMain.titleApps = "Data pemesanan";
+            renderMenu('data-pemesanan.php');
         }
     }
 });

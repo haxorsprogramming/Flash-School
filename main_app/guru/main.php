@@ -66,7 +66,7 @@ session_start();
             <ul class="sidebar-menu" style="margin-top:20px;">
               <li><a class="nav-link" @click="berandaAtc()" href="#!"><i class="fas fa-home"></i><span>Dashboard</span></a></li>
               <li><a class="nav-link" @click="profileAtc()" href="#!"><i class="fas fa-home"></i><span>Profil</span></a></li>
-              <li><a class="nav-link" href="#!"><i class="fas fa-home"></i><span>Data Pemesanan</span></a></li>
+              <li><a class="nav-link" @click="dataPemesananAtc()" href="#!"><i class="fas fa-home"></i><span>Data Pemesanan</span></a></li>
               <li><a class="nav-link" @click="tentoringSayaAtc()" href="#!"><i class="fas fa-home"></i><span>Tentoring Saya</span></a></li>
               <li><a class="nav-link" href="logout.php"><i class="fas fa-sign-out-alt"></i> <span>LogOut</span></a></li>
           </ul>
