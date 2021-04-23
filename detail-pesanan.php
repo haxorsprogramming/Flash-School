@@ -100,7 +100,7 @@ $totalJam = $fPesan['total_biaya'] / $hargaPerJam;
             <tr>
             <td>Bukti Pembayaran</td>
             <td>
-            <img src="file/bukti_pembayaran/<?=$kdPemesanan; ?>.png"  id="txtFoto" style="width: 200px;">
+            <img src="file/bukti_pembayaran/<?=$kdPemesanan; ?>.png" id="txtFoto" style="width: 200px;">
             <br/>
             <small>Upload bukti pembayaran</small>
             <input type="file" id="txtInputFoto" onchange="getImg()">
@@ -138,7 +138,7 @@ $totalJam = $fPesan['total_biaya'] / $hargaPerJam;
             <td>Status pembayaran</td><td><?=$statusPemesanan; ?></td>
             </tr>
             </table>
-            <a href="#!" class="btn btn-primary">Simpan</a>
+            <a href="#!" class="btn btn-primary" onclick="simpanAtc()">Simpan</a>
             <hr/>
             <h6>Informasi pembayaran</h6>
             <p>Silahkan lakukan pembayaran sebesar <b>Rp. <?=number_format($fPesan['total_biaya']); ?></b>, ke rekening BRI 8922-2122-122 an Flash School</p>
@@ -160,7 +160,7 @@ $totalJam = $fPesan['total_biaya'] / $hargaPerJam;
     <script src="js/custom.js"></script>
 
     <script>
-
+    var statusGanti = false;
     function getImg()
     {
         var fileGambar = new FileReader();
@@ -170,16 +170,36 @@ $totalJam = $fPesan['total_biaya'] / $hargaPerJam;
         fileGambar.onload = function(e){
             let hasil = e.target.result;
             sampulImg.src = hasil;
+            statusGanti = true;
         }
     }
 
-    function pesanUmumApp(icon, title, text) {
+    function pesanUmumApp(icon, title, text)
+    {
         Swal.fire({
             icon: icon,
             title: title,
             text: text
         });
     }
+
+    function simpanAtc()
+    {
+        if(statusGanti === false){
+            
+        }else{
+            let dataImg = document.querySelector('#txtFoto').getAttribute('src');
+            let kdPemesanan = "<?=$kdPemesanan; ?>";
+            let ds = {'dataImg':dataImg, 'kdPemesanan':kdPemesanan}
+            $.post('proses-upload-bukti-pembayaran.php', ds, function(data){
+                pesanUmumApp('success', 'Sukses', 'Berhasil mengupload bukti pembayaran');
+                setTimeout(function(){
+                    window.location.assign('pesanan-saya.php');
+                }, 2000);
+            });
+        }
+    }
+
     </script>
 
 </body>

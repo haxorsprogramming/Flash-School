@@ -40,6 +40,7 @@ session_start();
               $pr = 'main_app/guru/main.php';
             }else{
               $pr = 'main_app/siswa/main.php';
+              echo "<li><a href='pesanan-saya.php'>Pesanan Saya</a></li>";
             }
           ?>
             <li class="btn-trial"><a href="<?=$pr; ?>">Halo <?=$_SESSION['user_login']; ?></a></li>
