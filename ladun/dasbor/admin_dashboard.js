@@ -33,6 +33,11 @@ var divMenu = new Vue({
         {
             divMain.titleApps = "Data Pemesanan";
             renderMenu('data-pemesanan.php');
+        },
+        dataRegistrasiSiswa : function()
+        {
+            divMain.titleApps = "Data Registrasi Siswa";
+            renderMenu('data-registrasi-siswa.php');
         }
     }
 });

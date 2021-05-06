@@ -9,8 +9,6 @@ $qPemesanan = $link -> query("SELECT * FROM tbl_pemesanan WHERE kd_siswa='$usern
 
     <div id="divListPemesanan">
         <div style='margin-bottom:15px;'>
-            <!-- <a href='#!' class='btn btn-lg btn-primary  btn-icon icon-left' @click='tambahKursusAtc'>
-            <i class="fas fa-plus-circle"></i> Tambah Kursus</a> -->
         </div>
         <div class="row" style="padding-left:20px;margin-right:10px;">
             <table id="tblListPemesanan" class="table table-hover table-bordered table-stripped">
