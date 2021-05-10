@@ -1,5 +1,10 @@
 <?php
 include("header.php");
+if(isset($_SESSION['user_login'])){
+  $statusLogin = TRUE;
+}else{
+  $statusLogin = FALSE;
+}
 ?>
 <!--/ Modal box-->
 <!--Banner-->
@@ -12,7 +17,13 @@ include("header.php");
           <div class="intro-para text-center quote" style="padding-top:180px;">
             <p class="big-text">FLASH SCHOOL</p>
             <p class="small-text">Pesan Tentor Kursus Dengan Mudah dan Cepat</p>
-            <a href="cari-tentor.php" class="btn btn-primary btn-lg">Cari tentor</a>
+            <?php if($statusLogin == TRUE){ ?>
+              <?php if($_SESSION['user_login'] == 'guru'){ ?> <?php } ?>
+              
+              <a href="cari-tentor.php" class="btn btn-primary btn-lg">Cari tentor</a>
+            <?php }else{ ?>
+              <a href="login.php" class="btn btn-primary btn-lg">Silahkan login untuk mencari tentor</a>
+            <?php } ?>
           </div>
           <br>
         </div>

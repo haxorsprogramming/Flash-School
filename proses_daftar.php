@@ -18,8 +18,15 @@ $jlhUser = mysqli_num_rows($qCekUser);
 if($jlhUser == 0){
     $link -> query("INSERT INTO tbl_user VALUES(null, '$username','$password','$tipeUser','$waktu');");
     if($tipeUser == 'siswa'){
+        // data registrasi siswa 
+        $bahanRegistrasi = "qwertyuioplkjhgfdsazxcvbnm";
+        $acak = str_shuffle($bahanRegistrasi);
+        $kdRegistrasi = substr($acak, 0, 10);
+        $link -> query("INSERT INTO tbl_registrasi_siswa VALUES(null, '$kdRegistrasi','$username','$waktu','pending');");
+        
         $link -> query("INSERT INTO tbl_siswa VALUES(null, '$username','$namaLengkap','','-','-','-');");
         copy("file/img_siswa/default.png", "file/img_siswa/".$username.".png");
+
     }elseif($tipeUser == 'guru'){
         $link -> query("INSERT INTO tbl_guru VALUES(null, '$username','$namaLengkap','-','-','-','-','-','-');");
         copy("file/img_guru/default.png", "file/img_guru/".$username.".png");
