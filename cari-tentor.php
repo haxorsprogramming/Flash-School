@@ -2,6 +2,8 @@
 session_start();
 include "config/db.php";
 $qKursus = $link->query("SELECT * FROM tbl_kursus;");
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -54,22 +56,54 @@ $qKursus = $link->query("SELECT * FROM tbl_kursus;");
 
     <?php if(isset($_SESSION['user_login'])) { ?> 
 
-        <?php if($_SESSION["role"] == 'siswa'){?>
-            <div class="container">
-            <div style="margin-top:40px;text-align:center;">
-                <h6>Masukkan nama wilayah (Kota / Kabupaten)</h6>
-                <input id="pac-input" class="form-control" type="text" placeholder="Masukkan Kota / Kabupaten" />
-                <h6>Pilih jenis kursus</h6>
-                <select class="form-control" id="txtKursus">
-                    <?php while ($fKursus = $qKursus->fetch_assoc()) { ?>
-                        <option value="<?= $fKursus['kd_kursus']; ?>"><?= $fKursus['nama_kursus']; ?></option>
-                    <?php } ?>
-                </select>
-                <div style="margin-top:20px;">
-                    <a href="#!" class="btn btn-primary" onclick="getResult()"><i class="fas fa-search"></i> Cari tentor</a><br />
-                    <img src="file/find.png" style="width: 800px;">
-                </div>
+        <?php if($_SESSION["role"] == 'siswa'){ ?>
+
+        <?php 
+        // get status pembayaran 
+        $usernameLogin = $_SESSION['user_login'];
+        $qPembayaran = $link -> query("SELECT * FROM tbl_registrasi_siswa WHERE username='$usernameLogin' LIMIT 0,1;");
+        $fPembayaran = $qPembayaran -> fetch_assoc();
+        $statusPembayaran = $fPembayaran['status_pembayaran'];    
+        ?>
+
+        <?php if($statusPembayaran == 'pending'){ ?>
+            <div class="container" style="text-align: center;">
+                <img src="file/find.png" style="width: 800px;">
+                <h5>Kamu belum melakukan pembayaran registrasi, belum bisa melakukan pemesanan mentor, harap lakukan pembayaran ya ... </h5>
+                <a href="main_app/siswa/main.php" class="btn btn-success">Ke halaman administrasi</a>
+                <div style="margin-top:40px;text-align:center;display:none;">
+                    <h6>Masukkan nama wilayah (Kota / Kabupaten)</h6>
+                    <input id="pac-input" class="form-control" type="text" placeholder="Masukkan Kota / Kabupaten" />
+                    <h6>Pilih jenis kursus</h6>
+                    <select class="form-control" id="txtKursus">
+                        <?php while ($fKursus = $qKursus->fetch_assoc()) { ?>
+                            <option value="<?= $fKursus['kd_kursus']; ?>"><?= $fKursus['nama_kursus']; ?></option>
+                        <?php } ?>
+                    </select>
+                    <div style="margin-top:20px;">
+                        <a href="#!" class="btn btn-primary" onclick="getResult()"><i class="fas fa-search"></i> Cari tentor</a><br />
+                        <img src="file/find.png" style="width: 800px;">
+                    </div>
             </div>
+        <?php }else{ ?>
+            <div class="container">
+                <div style="margin-top:40px;text-align:center;">
+                    <h6>Masukkan nama wilayah (Kota / Kabupaten)</h6>
+                    <input id="pac-input" class="form-control" type="text" placeholder="Masukkan Kota / Kabupaten" />
+                    <h6>Pilih jenis kursus</h6>
+                    <select class="form-control" id="txtKursus">
+                        <?php while ($fKursus = $qKursus->fetch_assoc()) { ?>
+                            <option value="<?= $fKursus['kd_kursus']; ?>"><?= $fKursus['nama_kursus']; ?></option>
+                        <?php } ?>
+                    </select>
+                    <div style="margin-top:20px;">
+                        <a href="#!" class="btn btn-primary" onclick="getResult()"><i class="fas fa-search"></i> Cari tentor</a><br />
+                        <img src="file/find.png" style="width: 800px;">
+                    </div>
+            </div>
+        <?php } ?>
+
+            
         </div>
         <?php } else{ ?>
             <div class="container" style="text-align: center;">

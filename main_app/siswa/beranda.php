@@ -24,11 +24,19 @@ $jlhTentor = mysqli_num_rows($qTentor);
 // cari total siswa 
 $qSiswa = $link -> query("SELECT id FROM tbl_siswa;");
 $jlhSiswa = mysqli_num_rows($qSiswa);
+// cari status pembayaran
+$qPembayaran = $link -> query("SELECT * FROM tbl_registrasi_siswa WHERE username='$userLogin' LIMIT 0,1;");
+$fPembayaran = $qPembayaran -> fetch_assoc();
+$statusPembayaran = $fPembayaran['status_pembayaran']; 
 ?>
 
 <?php 
-if($nama == "-"){ ?>
-    <div class="alert alert-info">Terima kasih telah melakukan pendaftaran, harap lengkapi profil kamu agar dapat menggunakan aplikasi, terima kasih. </div>
+if($statusPembayaran == "pending"){ ?>
+    <div class="alert alert-warning">
+    Kamu belum melakukan pembayaran biaya registrasi, kamu tidak dapat melakukan pemesanan mentor, silahkan lakukan pembayaran & verifikasi pembayaran agak kamu dapat melakukan pememesanan mentor. 
+    <br/>
+    Jika sudah melakukan pembayaran, silahkan <a href="#!" onclick="konfirmasiPembayaran()"><b>konfirmasi di sini</b></a>
+    </div>
 <?php }else{ ?> 
 
 <?php } ?>
@@ -101,3 +109,11 @@ if($nama == "-"){ ?>
     </div>
   </div>
 </div>
+
+<script>
+function konfirmasiPembayaran()
+{
+  divMain.titleApps = "Konfirmasi pembayaran biaya pendaftaran";
+  renderMenu('form-konfirmasi-pembayaran.php');
+}
+</script>

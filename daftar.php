@@ -1,12 +1,6 @@
 <?php 
 session_start();
 include "config/db.php";
-// query biaya
-// $qBiaya = $link -> query("SELECT * FROM tbl_setting_bimbel WHERE kd_setting='BIAYA_REGISTRASI' LIMIT 0,1;");
-// $fBiaya = $qBiaya -> fetch_assoc();
-// $biaya = $fBiaya['nilai'];
-// query rekening 
-$qRekening = $link -> query("SELECT * FROM tbl_");
 
 function getOneData($kdSetting){
     global $link;
