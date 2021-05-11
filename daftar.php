@@ -24,10 +24,10 @@
                         <div class="col-lg-4 mx-auto">
                             <div class="auth-form-light text-left py-5 px-4 px-sm-5" id="daftar-app">
                                 <div class="brand-logo" style='text-align:center;'>
-                                    <img src="http://localhost/bimbelku/img/logo.png" alt="logo" style='width:150px; '>
+                                    <img src="./img/logo.png" alt="logo" style="width:150px;">
                                     <h3 style="font-weight:bold;margin-top:40px;">Flash School - Registrasi User</h3>
                                 </div>
-                                <div style='text-align:center;'>
+                                <div style="text-align:center;" id="divFormPendaftaran">
                                     <h6 class="font-weight-light">Harap isi field.</h6>
                                     <div>
                                         <div class="pt-3">
@@ -42,9 +42,9 @@
                                             </div>
                                             <div class="form-group">
                                                 <select class="form-control" id="txtTipeUser">
-                                                  <option value="none">-- Tipe User --</option>
-                                                  <option value="siswa">Siswa</option>
-                                                  <option value="guru">Guru</option>
+                                                    <option value="none">-- Tipe User --</option>
+                                                    <option value="siswa">Siswa</option>
+                                                    <option value="guru">Guru</option>
                                                 </select>
                                             </div>
                                             <div id='capNotifLogin'>
@@ -55,12 +55,12 @@
                                             </div>
 
                                             <div class="mt-5 text-muted text-center">
-                                              Sudah punya akun? Silahkan <a href="login.php">Login</a>
+                                                Sudah punya akun? Silahkan <a href="login.php">Login</a>
                                             </div>
 
                                             <div class="mt-2">
                                                 <div style='padding-top:12px;'>
-                                                <hr/>
+                                                    <hr />
                                                     <h5 class="font-weight-light">Develop By : {{developer}}</h5>
                                                     <strong></strong>
                                                 </div>
@@ -68,8 +68,25 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div id="divSucessDaftar" style="margin-top:30px;text-align:center;display:none;">
+                                    <h2 class="font-weight-light">Pendaftaran Sukses</h2>
+                                    <img src="./img/success-registrasi.png" style="width: 400px;">
+                                    <br /><br />
+                                    <p>Silahkan lakukan pembayaran biaya pendaftaran sebesar Rp. 75.000, ke nomor
+                                        rekening, kemudian lakukan konfirmasi pembayaran pada saat masuk ke aplikasi. Terima kasih</p>
+                                    <div class="mt-5 text-muted text-center">
+                                        Sudah lakukan pembayaran? Silahkan <a href="login.php">Login</a>
+                                    </div>
+                                    <div class="mt-2">
+                                        <div style='padding-top:12px;'>
+                                            <hr />
+                                            <h5 class="font-weight-light">Develop By : {{developer}}</h5>
+                                            <strong></strong>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div id='divWorker'></div>
+
                         </div>
                     </div>
                     <!-- content-wrapper ends -->
@@ -81,7 +98,7 @@
             <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
             <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-            
+
             <script src="ladun/vendors/base/vendor.bundle.base.js"></script>
             <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
             <!-- endinject -->

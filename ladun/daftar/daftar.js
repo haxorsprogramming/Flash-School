@@ -23,10 +23,8 @@ var loginApp = new Vue({
                     let obj = JSON.parse(data);
                     let status = obj.status;
                     if(status === 'sukses'){
-                        pesanUmumApp('success', 'Sukses', 'Berhasil melakukan pendaftaran user. Akan dialihkan ke halaman login dalam beberapa detik.');
-                        setTimeout(function(){
-                            window.location.assign('login.php');
-                        }, 3000);
+                        $("#divFormPendaftaran").hide();
+                        $("#divSucessDaftar").show();
                     }else{
                         document.querySelector("#txtPassword").value = "";
                         document.querySelector('#txtUsername').focus();
@@ -41,7 +39,7 @@ var loginApp = new Vue({
 });
 
 // inisialisasi 
-document.querySelector('#txtNamaLengkap').focus();
+document.querySelector("#txtNamaLengkap").focus();
 
 function pesanUmumApp(icon, title, text)
 {
