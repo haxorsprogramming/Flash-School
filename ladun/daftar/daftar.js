@@ -23,8 +23,13 @@ var loginApp = new Vue({
                     let obj = JSON.parse(data);
                     let status = obj.status;
                     if(status === 'sukses'){
-                        $("#divFormPendaftaran").hide();
-                        $("#divSucessDaftar").show();
+                        if(tipeUser === 'siswa'){
+                            $("#divFormPendaftaran").hide();
+                            $("#divSucessDaftarSiswa").show();
+                        }else{
+                            $("#divFormPendaftaran").hide();
+                            $("#divSucessDaftarGuru").show();
+                        }
                     }else{
                         document.querySelector("#txtPassword").value = "";
                         document.querySelector('#txtUsername').focus();

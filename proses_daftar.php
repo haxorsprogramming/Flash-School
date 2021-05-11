@@ -25,8 +25,10 @@ if($jlhUser == 0){
         $link -> query("INSERT INTO tbl_registrasi_siswa VALUES(null, '$kdRegistrasi','$username','$waktu','pending');");
         
         $link -> query("INSERT INTO tbl_siswa VALUES(null, '$username','$namaLengkap','','-','-','-');");
+        // copy foto profile
         copy("file/img_siswa/default.png", "file/img_siswa/".$username.".png");
-
+        // copy bukti pendaftaran
+        copy("file/bukti_pendaftaran/default.png", "file/bukti_pendaftaran/".$username.".png");
     }elseif($tipeUser == 'guru'){
         $link -> query("INSERT INTO tbl_guru VALUES(null, '$username','$namaLengkap','-','-','-','-','-','-');");
         copy("file/img_guru/default.png", "file/img_guru/".$username.".png");

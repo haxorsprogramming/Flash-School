@@ -1,3 +1,24 @@
+<?php 
+session_start();
+include "config/db.php";
+// query biaya
+// $qBiaya = $link -> query("SELECT * FROM tbl_setting_bimbel WHERE kd_setting='BIAYA_REGISTRASI' LIMIT 0,1;");
+// $fBiaya = $qBiaya -> fetch_assoc();
+// $biaya = $fBiaya['nilai'];
+// query rekening 
+$qRekening = $link -> query("SELECT * FROM tbl_");
+
+function getOneData($kdSetting){
+    global $link;
+    $qOne = $link -> query("SELECT * FROM tbl_setting_bimbel WHERE kd_setting='$kdSetting' LIMIT 0,1;");
+    $fOne = $qOne -> fetch_assoc();
+    return $fOne['nilai'];
+}
+
+$biaya = getOneData("BIAYA_REGISTRASI");
+$rekening = getOneData("REKENING");
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -59,7 +80,7 @@
                                             </div>
 
                                             <div class="mt-2">
-                                                <div style='padding-top:12px;'>
+                                                <div style="padding-top:12px;">
                                                     <hr />
                                                     <h5 class="font-weight-light">Develop By : {{developer}}</h5>
                                                     <strong></strong>
@@ -68,12 +89,28 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div id="divSucessDaftar" style="margin-top:30px;text-align:center;display:none;">
+                                <div id="divSucessDaftarSiswa" style="margin-top:30px;text-align:center;display:none;">
                                     <h2 class="font-weight-light">Pendaftaran Sukses</h2>
                                     <img src="./img/success-registrasi.png" style="width: 400px;">
                                     <br /><br />
-                                    <p>Silahkan lakukan pembayaran biaya pendaftaran sebesar Rp. 75.000, ke nomor
-                                        rekening, kemudian lakukan konfirmasi pembayaran pada saat masuk ke aplikasi. Terima kasih</p>
+                                    <p>Silahkan lakukan pembayaran biaya pendaftaran sebesar Rp. <?=number_format($biaya); ?>, ke nomor
+                                        rekening <?=$rekening; ?>, kemudian lakukan konfirmasi pembayaran pada saat masuk ke aplikasi. Terima kasih</p>
+                                    <div class="mt-5 text-muted text-center">
+                                        Sudah lakukan pembayaran? Silahkan <a href="login.php">Login</a>
+                                    </div>
+                                    <div class="mt-2">
+                                        <div style='padding-top:12px;'>
+                                            <hr />
+                                            <h5 class="font-weight-light">Develop By : {{developer}}</h5>
+                                            <strong></strong>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="divSucessDaftarGuru" style="margin-top:30px;text-align:center;display:none;">
+                                    <h2 class="font-weight-light">Pendaftaran Sukses</h2>
+                                    <img src="./img/success-registrasi.png" style="width: 400px;">
+                                    <br /><br />
+                                    <p>Terima kasih telah mendaftar calon mentor. Silahkan masuk ke akun anda dan lengkapi data diri sebelum menerima pesanan mentoring, terima kasih</p>
                                     <div class="mt-5 text-muted text-center">
                                         Sudah lakukan pembayaran? Silahkan <a href="login.php">Login</a>
                                     </div>
