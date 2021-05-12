@@ -68,8 +68,8 @@ include('../config/db.php');
           </div>
           <ul class="sidebar-menu" style="margin-top:20px;">
             <li><a class="nav-link" @click="berandaAtc()" href="#!"><i class="fas fa-home"></i><span>Dashboard</span></a></li>
-            <li><a class="nav-link" @click="dataRegistrasiSiswa()" href="#!"><i class="fas fa-home"></i><span>Data Registrasi Siswa</span></a></li>
-            <li><a class="nav-link" @click="dataPemesanan()" href="#!"><i class="fas fa-home"></i><span>Data Pemesanan</span></a></li>
+            <li><a class="nav-link" @click="dataRegistrasiSiswa()" href="#!"><i class="far fa-clipboard"></i><span>Data Registrasi Siswa</span></a></li>
+            <li><a class="nav-link" @click="dataPemesanan()" href="#!"><i class="fas fa-calendar-check"></i><span>Data Pemesanan</span></a></li>
 
             <li class="dropdown">
               <a href="#!" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-newspaper"></i> <span>Data Master</span></a>
@@ -77,9 +77,10 @@ include('../config/db.php');
                 <li><a class="nav-link" href="#!">Siswa</a></li>
                 <li><a @click="guruAtc()" class="nav-link" href="#!">Guru</a></li>
                 <li><a @click="kursusAtc()" class="nav-link" href="#!">Kursus</a></li>
+                <li><a @click="paketKursusAtc()" class="nav-link" href="#!">Paket Kursus</a></li>
               </ul>
             </li>
-            <li><a @click="settingBimbelAtc()" class="nav-link" href="#!"><i class="fas fa-home"></i><span>Setting Bimbel</span></a></li>
+            <li><a @click="settingBimbelAtc()" class="nav-link" href="#!"><i class="fas fa-sliders-h"></i><span>Setting Bimbel</span></a></li>
             <li><a class="nav-link" href="logout.php"><i class="fas fa-sign-out-alt"></i> <span>LogOut</span></a></li>
           </ul>
         </aside>

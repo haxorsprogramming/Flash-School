@@ -48,7 +48,8 @@ var divSetting = new Vue({
     methods : {
         editAtc : function(kdSetting)
         {
-            console.log(kdSetting);
+            divMain.titleApps = "Setting Bimbel";
+            renderMenu('edit-setting-bimbel.php?kd_setting='+kdSetting);
         }
     }
 });

@@ -43,6 +43,11 @@ var divMenu = new Vue({
         {
             divMain.titleApps = "Setting Bimbel";
             renderMenu('setting-bimbel.php');
+        },
+        paketKursusAtc : function()
+        {
+            divMain.titleApps = "Paket Kursus";
+            renderMenu('paket-kursus.php');
         }
     }
 });
