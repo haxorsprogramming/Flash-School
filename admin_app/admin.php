@@ -60,7 +60,7 @@ include('../config/db.php');
         <aside id="sidebar-wrapper">
           <div class="sidebar-brand">
             <a href="#!" style="height:30px;">
-              <img src="http://localhost/bimbelku/img/logo.png" style="width: 140px;">
+              <img src="<?=$base_url; ?>img/logo.png" style="width: 140px;">
             </a>
           </div>
           <div class="sidebar-brand sidebar-brand-sm">
@@ -79,7 +79,7 @@ include('../config/db.php');
                 <li><a @click="kursusAtc()" class="nav-link" href="#!">Kursus</a></li>
               </ul>
             </li>
-            <li><a class="nav-link" href="#!"><i class="fas fa-home"></i><span>Setting Bimbel</span></a></li>
+            <li><a @click="settingBimbelAtc()" class="nav-link" href="#!"><i class="fas fa-home"></i><span>Setting Bimbel</span></a></li>
             <li><a class="nav-link" href="logout.php"><i class="fas fa-sign-out-alt"></i> <span>LogOut</span></a></li>
           </ul>
         </aside>
@@ -91,7 +91,6 @@ include('../config/db.php');
           <div class="section-header">
             <h1 id="capUtama"> Flash School - {{ titleApps }}</h1>
           </div>
-
           <div id="divUtama"></div>
         </section>
       </div>

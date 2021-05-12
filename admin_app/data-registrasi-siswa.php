@@ -25,6 +25,7 @@ $qRegistrasi = $link -> query("SELECT * FROM tbl_registrasi_siswa;");
                     $qSiswa = $link -> query("SELECT * FROM tbl_siswa WHERE username='$username' LIMIT 0,1;");
                     $fSiswa = $qSiswa -> fetch_assoc();
                     $namaSiswa = $fSiswa['nama_lengkap'];
+                    $statusPembayaran = $fRegistrasi['status_pembayaran'];
                 ?>
                 <tr>
                     <td><?=$fRegistrasi['kd_registrasi']; ?></td>
@@ -33,7 +34,12 @@ $qRegistrasi = $link -> query("SELECT * FROM tbl_registrasi_siswa;");
                     <td><?=$fRegistrasi['status_pembayaran']; ?></td>
                     <td><a href="<?=$base_url; ?>file/bukti_pendaftaran/<?=$username; ?>.png" target="new">Lihat</a></td>
                     <td>
+                    <?php if($statusPembayaran === 'pending'){ ?>
                         <a href="#!" class="btn btn-primary" @click="verifikasiAtc('<?=$username; ?>')"><i class="fas fa-check-circle"></i> Verifikasi</a>
+                    <?php }else{ ?>
+                    
+                    <?php } ?>
+                        
                     </td>
                 </tr>
                 <?php } $no++; ?>
@@ -57,9 +63,26 @@ var divRegistrasi = new Vue({
     methods : {
         verifikasiAtc : function(username)
         {
-            $.post(rToVerifikasi, function(data){
-                console.log(data);
+            Swal.fire({
+                title: "Konfirmasi ... ?",
+                text: "Yakin memverifikasi pembayaran untuk pendaftaran siswa ini ... ?",
+                icon: "info",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Ya",
+                cancelButtonText: "Tidak",
+            }).then((result) => {
+                if (result.value) {
+                    let ds = {'username':username}
+                    $.post(rToVerifikasi, ds, function(data){
+                        pesanUmumApp('success', 'Sukses', 'Berhasil merubah status pembayaran registrasi siswa ... ');
+                        divMain.titleApps = "Data Registrasi Siswa";
+                        renderMenu('data-registrasi-siswa.php');
+                    });
+                }
             });
+           
         }
     }
 });

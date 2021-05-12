@@ -38,6 +38,11 @@ var divMenu = new Vue({
         {
             divMain.titleApps = "Data Registrasi Siswa";
             renderMenu('data-registrasi-siswa.php');
+        },
+        settingBimbelAtc : function()
+        {
+            divMain.titleApps = "Setting Bimbel";
+            renderMenu('setting-bimbel.php');
         }
     }
 });
