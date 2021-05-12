@@ -31,7 +31,7 @@
                                     <h6 class="font-weight-light">Harap masuk untuk melanjutkan.</h6>
                                     <div>
                                         <div class="pt-3">
-                                        
+
                                             <div class="form-group">
                                                 <input type="text" class="form-control" id="txtUsername" placeholder="Username">
                                             </div>
@@ -46,12 +46,12 @@
                                             </div>
 
                                             <div class="mt-5 text-muted text-center">
-                                              Belum punya akun? Silahkan <a href="daftar.php">Daftar</a>
+                                                Belum punya akun? Silahkan <a href="daftar.php">Daftar</a>
                                             </div>
 
                                             <div class="mt-2">
                                                 <div style='padding-top:12px;'>
-                                                <hr/>
+                                                    <hr />
                                                     <h5 class="font-weight-light">Develop By : {{developer}}</h5>
                                                     <strong></strong>
                                                 </div>
@@ -72,7 +72,7 @@
             <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
             <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-            
+
             <script src="ladun/vendors/base/vendor.bundle.base.js"></script>
             <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
             <!-- endinject -->
