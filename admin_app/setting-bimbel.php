@@ -25,7 +25,7 @@ $qSetting = $link -> query("SELECT * FROM tbl_setting_bimbel;");
                     <td><?=$fSetting['nama_setting']; ?></td>
                     <td><?=$fSetting['nilai']; ?></td>
                     <td>
-                        <a @click="editAtc('<?=$fSetting['kd_setting']; ?>')" href="#!" class="btn btn-primary btn-sm"><i class="fas fa-pencil-alt"></i> Edit</a>
+                        <a @click="editAtc('<?=$fSetting['kd_setting']; ?>')" href="#!" class="btn btn-primary"><i class="fas fa-pencil-alt"></i> Edit</a>
                     </td>
                 </tr>
                 <?php } ?>

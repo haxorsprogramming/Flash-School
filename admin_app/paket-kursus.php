@@ -26,7 +26,7 @@ $qPaketKursus = $link -> query("SELECT * FROM tbl_paket;");
                     <td><?=$fPaket['keterangan']; ?></td>
                     <td><?=$fPaket['jenjang']; ?></td>
                     <td>Rp. <?=number_format($fPaket['harga']); ?></td>
-                    <td><a href="#!" class="btn btn-warning">Hapus</a></td>
+                    <td><a href="#!" class="btn btn-warning" @click="hapusAtc('<?=$fPaket['kd_paket']; ?>')">Hapus</a></td>
                 </tr>
                 <?php } ?>
                 </tbody>
@@ -74,6 +74,7 @@ $qPaketKursus = $link -> query("SELECT * FROM tbl_paket;");
 <script>
 
 var rToTambahPaket = "<?=$base_url; ?>admin_app/proses-tambah-paket.php";
+var rToHapusPaket = "<?=$base_url; ?>admin_app/proses-hapus-paket.php";
 
 $("#tblPaketKursus").dataTable();
 
@@ -88,6 +89,20 @@ var divListKursus = new Vue({
             $("#divListKursus").hide();
             $("#divTambahPaketKursus").show();
             document.querySelector("#txtNamaPaket").focus();
+        },
+        hapusAtc : function(kdPaket)
+        {
+            let konfirmasi = window.confirm("Yakin menghapus paket ini? ...");
+            if(konfirmasi === true){
+                let ds = {'kdPaket':kdPaket}
+                $.post(rToHapusPaket, ds, function(data){
+                    pesanUmumApp('success', 'Sukses', 'Berhasil menghapus paket kursus ... ');
+                    divMenu.paketKursusAtc();
+                });
+            }else{
+
+            }
+            
         }
     }
 });
