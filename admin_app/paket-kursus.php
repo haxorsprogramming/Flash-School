@@ -1,3 +1,7 @@
+<?php 
+include('../config/db.php');
+$qPaketKursus = $link -> query("SELECT * FROM tbl_paket;");
+?>
 <div id="divPaketKursus">
     <div id="divListKursus">
         <div style="margin-bottom:15px;">
@@ -15,20 +19,30 @@
                         <th>Aksi</th>
                     </tr>
                 </thead>
-                
+                <tbody>
+                <?php while($fPaket = $qPaketKursus -> fetch_assoc()){ ?>
+                <tr>
+                    <td><?=$fPaket['nama_paket']; ?></td>
+                    <td><?=$fPaket['keterangan']; ?></td>
+                    <td><?=$fPaket['jenjang']; ?></td>
+                    <td>Rp. <?=number_format($fPaket['harga']); ?></td>
+                    <td><a href="#!" class="btn btn-warning">Hapus</a></td>
+                </tr>
+                <?php } ?>
+                </tbody>
             </table>
         </div>
     </div>
     <div id="divTambahPaketKursus" style="display: none;">
         <div>
-            <a href="#!" class="btn btn-primary btn-icon icon-left" @click='kembaliAtc'>
+            <a href="#!" class="btn btn-primary btn-icon icon-left" @click="kembaliAtc">
                 <i class="fas fa-reply"></i> Kembali
             </a>
         </div>
         <div class="col-lg-6 col-md-6 col-sm-6 col-12 mt-3">
             <div class="form-group">
                 <label>Nama Paket</label>
-                <input type="text" class="form-control" id="txtNamaKursus">
+                <input type="text" class="form-control" id="txtNamaPaket">
             </div>
             <div class="form-group">
                 <label>Keterangan</label>
@@ -36,10 +50,10 @@
             </div>
             <div class="form-group">
                 <label>Jenjang</label>
-                <select class="form-control" id="txtKategori">
-                    <option value="Akademik">Akademik</option>
-                    <option value="Bahasa">Bahasa</option>
-                    <option value="Seni">Seni</option>
+                <select class="form-control" id="txtJenjang">
+                    <option value="sd">SD</option>
+                    <option value="smp">SMP</option>
+                    <option value="sma">SMA</option>
                 </select>
             </div>
             <div class="form-group">
@@ -59,6 +73,8 @@
 
 <script>
 
+var rToTambahPaket = "<?=$base_url; ?>admin_app/proses-tambah-paket.php";
+
 $("#tblPaketKursus").dataTable();
 
 var divListKursus = new Vue({
@@ -71,9 +87,34 @@ var divListKursus = new Vue({
         {
             $("#divListKursus").hide();
             $("#divTambahPaketKursus").show();
-            document.querySelector("#txtNamaKursus").focus();
+            document.querySelector("#txtNamaPaket").focus();
         }
     }
+});
+
+var divTambahPaketKursus = new Vue({
+     el : '#divTambahPaketKursus',
+     data : {
+
+     },
+     methods : {
+        simpanAtc : function()
+        {
+            let namaPaket = document.querySelector("#txtNamaPaket").value;
+            let keterangan = document.querySelector("#txtKeterangan").value;
+            let jenjang = document.querySelector("#txtJenjang").value;
+            let harga = document.querySelector("#txtHarga").value;
+            let ds = {'namaPaket':namaPaket, 'keterangan':keterangan, 'jenjang':jenjang, 'harga':harga}
+            $.post(rToTambahPaket, ds, function(data){
+                pesanUmumApp('success', 'Sukses', 'Berhasil menambahkan paket kursus ... ');
+                divMenu.paketKursusAtc();
+            });
+        },
+        kembaliAtc : function()
+        {
+
+        }
+     }
 });
 
 </script>

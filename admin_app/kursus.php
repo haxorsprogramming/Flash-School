@@ -18,7 +18,7 @@ include('../config/db.php');
                 </thead>
                 <tbody>
                     <?php
-                        $qKursus = $link -> query("SELECT * FROM tbl_kursus;");
+                         $qKursus = $link -> query("SELECT * FROM tbl_kursus;");
                         while($fKursus = $qKursus -> fetch_assoc())
                         {
                             $kdKursus = $fKursus['kd_kursus'];
