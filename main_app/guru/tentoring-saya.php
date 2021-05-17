@@ -37,7 +37,7 @@ $qTentor = $link -> query("SELECT * FROM tbl_tentor WHERE username='$usernameLog
                                 <td><?=$fTentor['tempat']; ?></td>
                                 <td><?=$fTentor['daerah_layanan']; ?></td>
                                 <td>
-                                    <a href="#!" class="btn btn-warning" @click="hapusAtc('<?=$fTentor['kd_tentor']; ?>')">Hapus</a>
+                                    <a href="#!" class="btn btn-warning" @click="hapusAtc('<?=$fTentor['kd_tentor']; ?>')"><i class="fas fa-trash-alt"></i> Hapus</a>
                                 </td>
                             </tr>
                         <?php } ?>
@@ -79,11 +79,7 @@ $qTentor = $link -> query("SELECT * FROM tbl_tentor WHERE username='$usernameLog
             <a href="#!" class="btn btn-primary" @click="simpanAtc()">Simpan</a>
             </div>
         </div>
-        <div class="col-lg-6 col-md-6 col-sm-6 col-12 mt-3">
-
-            
-
-        </div>
+        <div class="col-lg-6 col-md-6 col-sm-6 col-12 mt-3"></div>
     </div>
 </div>
 
