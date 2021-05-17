@@ -15,6 +15,8 @@ $fGuru = $qGuru -> fetch_assoc();
 $qKursus = $link -> query("SELECT * FROM tbl_kursus WHERE kd_kursus='$kdKursus';");
 $fKursus = $qKursus -> fetch_assoc();
 $namaKursus = $fKursus['nama_kursus'];
+// query paket
+$qPaket = $link -> query("SELECT * FROM tbl_paket;");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -81,17 +83,32 @@ $namaKursus = $fKursus['nama_kursus'];
                     <td>Kursus</td><td><?=$namaKursus ; ?></td>
                 </tr>
                 <tr>
-                    <td>Harga / Jam</td><td>Rp. <?=number_format($fTentor['harga']); ?></td>
-                </tr>
-                <tr>
-                    <td>Total jam dipesan</td><td><span id="txtTotalJam">-</span></td>
-                </tr>
-                <tr>
                     <td>Total harga</td><td><span id="txtTotalHarga">-</span></td>
+                </tr>
+                <tr>
+                    <td>Jenis paket</td><td><span id="txtJenisPaket">-</span></td>
+                </tr>
+                <tr>
+                    <td>Total pertemuan</td><td><span id="txtTotalPertemuan">-</span></td>
                 </tr>
               </table>
               <div>
-              <h5>Pilih waktu mentoring</h5>
+              <h5>Pilih jenis paket</h5>
+              </div> 
+              <div class="form-group">
+                    <label>Paket</label>
+                    <select class="form-control" onchange="setPaket()" id="txtPaket">
+                        <option value="none">-- Pilih paket --</option>
+                        <?php while($fPaket = $qPaket -> fetch_assoc()){ ?>
+                            <option value="<?=$fPaket['kd_paket']; ?>|<?=$fPaket['pertemuan']; ?>|<?=$fPaket['nama_paket']; ?>|<?=$fPaket['harga']; ?>">
+                                <?=$fPaket['nama_paket']; ?> (Rp. <?=number_format($fPaket['harga']); ?>) - Total <?=$fPaket['pertemuan']; ?> Pertemuan
+                            </option>
+                        <?php } ?>
+                    </select>
+              </div>
+              <hr/>
+              <div>
+              <h5>Pilih waktu mentoring (<span id="capPilihWaktu"></span>)</h5>
               </div> 
               <table class="table">
               <?php
@@ -122,11 +139,11 @@ $namaKursus = $fKursus['nama_kursus'];
                 <?php } ?>   
               </table>
                     <?php if (isset($_SESSION['user_login'])) { ?>
-                        <a href="#!" class="btn btn-primary" onclick="prosesPraPesanan()">Buat pesanan</a>
+                        <a href="#!" class="btn btn-primary" onclick="prosesPraPesanan()"><i class="far fa-credit-card"></i> Buat pesanan</a>
                     <?php } else { ?>
                         Harap <a href="login.php" style="color: blue;">login</a> terlebih dahulu untuk melakukan pemesanan!!&nbsp;
                     <?php } ?>
-                <a href="#!" class="btn btn-info" onclick="refreshHalaman()">Refresh Jadwal</a>         
+                <a href="#!" class="btn btn-info" onclick="refreshHalaman()"><i class="fas fa-history"></i> Refresh Jadwal</a>         
         </div>
     </div>
 
@@ -150,23 +167,30 @@ $namaKursus = $fKursus['nama_kursus'];
         location.reload();
     }
 
+    var rToBuatPraPesanan = "<?=$base_url; ?>buat-pra-pesanan.php";
+    var rToUpdatePesanan = "<?=$base_url; ?>update-item-pesanan.php";
     var dataJam = [];
-    var hargaPerJam = "<?=$fTentor['harga']; ?>";
     var totalHarga = 0;
     var kdTentor = "<?=$kdTentor; ?>";
+    var totalPertemuanMinggu = 0;
 
     $(".btnAdd").click(function(){
-        let jam = $(this).attr('id');
-        dataJam.push(jam);
-        console.log(dataJam);
-        let totalJam = dataJam.length;
-        totalHarga = parseInt(totalHarga) + parseInt(hargaPerJam);
-        let formatRupiah = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'IDR' }).format(totalHarga);
-        document.querySelector("#txtTotalJam").innerHTML = totalJam;
-        document.querySelector("#txtTotalHarga").innerHTML = formatRupiah;
-        $(this).removeClass('btn-success');
-        $(this).addClass('btn-warning');
-        $(this).addClass('disabled');
+        let totalJamSekarang = dataJam.length;
+        if(totalPertemuanMinggu < 1){
+            pesanUmumApp('warning', 'Pilih paket', 'Harap pilih paket terlebih dahulu ...');
+        }else{
+            if(totalJamSekarang >= totalPertemuanMinggu){
+            pesanUmumApp('warning', 'Over limit', 'Quota total pertemuan telah habis ...');
+            }else{
+                let jam = $(this).attr('id');
+                dataJam.push(jam);
+                let totalJam = dataJam.length;
+                $(this).removeClass('btn-success');
+                $(this).addClass('btn-warning');
+                $(this).addClass('disabled');
+            }
+        }
+
     });
 
     function pesanUmumApp(icon, title, text) {
@@ -194,30 +218,39 @@ $namaKursus = $fKursus['nama_kursus'];
             cancelButtonText: "Tidak",
             }).then((result) => {
                 if (result.value) {
-                    let ds = {'kdTentor':kdTentor, 'totalJam':totalJam}
-                    $.post('buat-pra-pesanan.php', ds, function(data){
-                        let obj = JSON.parse(data);
-                        let kdPemesanan = obj.kd_pemesanan;
-                        let kdTentor = obj.kd_tentor;
-                        //save to item pesanan 
-                        var i;
-                        for(i = 0; i < dataJam.length; i++){
-                            let ds = {'kdPesanan':kdPemesanan, 'kdJadwal':dataJam[i], 'kdTentor':kdTentor}
-                            $.post('update-item-pesanan.php', ds, function(data){
-                                let obj = JSON.parse(data);
-                                console.log(obj);
-                            });
-                        }
-                        pesanUmumApp('success', 'Sukses', 'Sukses melakukan pemesanan tentor ... Silahkan lakukan pembayaran di halaman berikutnya');
-                        setTimeout(function(){
-                            window.location.assign('pesanan-saya.php');
-                        }, 3000);
+                    let dataPaket = document.querySelector("#txtPaket").value;
+                    let exPaket = dataPaket.split("|");
+                    let kdPaket = exPaket[0];
+                    let ds = {'kdTentor':kdTentor, 'kdPaket':kdPaket}
+                    $.post(rToBuatPraPesanan, ds, function(data){
                         
                     });
                 }
             });
         }
         
+    }
+
+    function setPaket()
+    {
+        let paket = document.querySelector("#txtPaket").value;
+        if(paket === 'none'){
+
+        }else{
+            let paketSplit = paket.split("|");
+            let totalPertemuan = paketSplit[1];
+            let namaPaket = paketSplit[2];
+            let pertemuanSet = parseInt(totalPertemuan) / 4;
+            let totalHarga = paketSplit[3];
+            totalPertemuanMinggu = pertemuanSet;
+            let teksPertemuan = totalPertemuan + " per-bulan | " + pertemuanSet + " per-minggu";
+            let teksCap = "Hanya dapat memilih total " + pertemuanSet + " pertemuan per minggu";
+
+            document.querySelector("#txtJenisPaket").innerHTML = namaPaket;
+            document.querySelector("#txtTotalPertemuan").innerHTML = teksPertemuan;
+            document.querySelector("#capPilihWaktu").innerHTML = teksCap;
+            document.querySelector("#txtTotalHarga").innerHTML = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'IDR' }).format(totalHarga);;
+        }
     }
 
     </script>

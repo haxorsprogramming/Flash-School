@@ -7,8 +7,9 @@ class dataRespon{}
 $dr = new dataRespon();
 
 // {'kdTentor':kdTentor, 'totalJam':totalJam}
+// {'kdTentor':kdTentor, 'kdPaket':kdPaket}
 $kdTentor = $_POST['kdTentor'];
-$totalJam = $_POST['totalJam'];
+$kdPaket = $_POST['kdPaket'];
 
 $waktu = date("Y-m-d H:i:s");
 
@@ -18,15 +19,15 @@ $acak = str_shuffle($bahanKode);
 $kd_pemesanan = substr($acak, 0, 10);
 
 // query data tentor 
-$qTentor = $link -> query("SELECT * FROM tbl_tentor WHERE kd_tentor='$kdTentor' LIMIT 0, 1;");
-$fTentor = $qTentor -> fetch_assoc();
-$harga = $fTentor['harga'];
+// $qTentor = $link -> query("SELECT * FROM tbl_tentor WHERE kd_tentor='$kdTentor' LIMIT 0, 1;");
+// $fTentor = $qTentor -> fetch_assoc();
+// $harga = $fTentor['harga'];
 
-$totalHarga = $harga * $totalJam;
+// $totalHarga = $harga * $totalJam;
 
-copy("file/bukti_pembayaran/default.png", "file/bukti_pembayaran/".$kd_pemesanan.".png");
+// copy("file/bukti_pembayaran/default.png", "file/bukti_pembayaran/".$kd_pemesanan.".png");
 
-$qSimpan = "INSERT INTO tbl_pemesanan VALUES(null, '$kd_pemesanan', '$kdTentor', '$usernameLogin', '$totalHarga', '$waktu', '', 'pending', 'pending');";
+$qSimpan = "INSERT INTO tbl_pemesanan VALUES(null, '$kd_pemesanan', '$kdTentor', '$usernameLogin', '$kdPaket', '$waktu', '', 'pending', 'pending', 'pending');";
 $link -> query($qSimpan);
 
 $dr -> kd_pemesanan = $kd_pemesanan;

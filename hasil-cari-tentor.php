@@ -89,7 +89,7 @@ $namaKursus = $fKursus['nama_kursus'];
                             <?php }else{ ?>
                                 <p>Tempat kursus : Tempat Kursus</p>
                             <?php } ?>
-                            <p>Harga / Jam : Rp. <?=number_format($fDaerah['harga']); ?></p>
+                            
                             <p>Bio : <?=$fDaerah['latar_belakang']; ?></p>
                             <p><a href="pesan-tentor.php?kd_tentor=<?=$kdTentor; ?>" class="btn btn-primary"><i class="fas fa-check-circle"></i> Pesan</a></p>
                         </div>
