@@ -26,7 +26,9 @@ $qPaketKursus = $link -> query("SELECT * FROM tbl_paket;");
                     <td><?=$fPaket['keterangan']; ?></td>
                     <td><?=$fPaket['jenjang']; ?></td>
                     <td>Rp. <?=number_format($fPaket['harga']); ?></td>
-                    <td><a href="#!" class="btn btn-warning" @click="hapusAtc('<?=$fPaket['kd_paket']; ?>')">Hapus</a></td>
+                    <td>
+                        <a href="#!" class="btn btn-warning" @click="hapusAtc('<?=$fPaket['kd_paket']; ?>')"><i class="fas fa-trash"></i> Hapus</a>
+                    </td>
                 </tr>
                 <?php } ?>
                 </tbody>

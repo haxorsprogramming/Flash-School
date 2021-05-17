@@ -18,8 +18,8 @@ $qTentor = $link -> query("SELECT * FROM tbl_tentor WHERE username='$usernameLog
                         <th>Kd Tentor</th>
                         <th>Kursus</th>
                         <th>Tempat</th>
-                        <th>Harga</th>
                         <th>Daerah Layanan</th>
+                        <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -35,8 +35,10 @@ $qTentor = $link -> query("SELECT * FROM tbl_tentor WHERE username='$usernameLog
                                 <td><?=$fTentor['kd_tentor']; ?></td>
                                 <td><?=$namaKursus; ?></td>
                                 <td><?=$fTentor['tempat']; ?></td>
-                                <td>Rp. <?=number_format($fTentor['harga']); ?></td>
                                 <td><?=$fTentor['daerah_layanan']; ?></td>
+                                <td>
+                                    <a href="#!" class="btn btn-warning" @click="hapusAtc('<?=$fTentor['kd_tentor']; ?>')">Hapus</a>
+                                </td>
                             </tr>
                         <?php } ?>
                 </tbody>
@@ -45,7 +47,7 @@ $qTentor = $link -> query("SELECT * FROM tbl_tentor WHERE username='$usernameLog
     </div>
     <div id="divTambahMentoring">
         <div>
-            <a href='#!' class="btn btn-primary btn-icon icon-left">
+            <a href="#!" class="btn btn-primary btn-icon icon-left">
                 <i class='fas fa-reply'></i> Kembali
             </a>
         </div>
@@ -64,10 +66,6 @@ $qTentor = $link -> query("SELECT * FROM tbl_tentor WHERE username='$usernameLog
                         <option value="<?=$fKursus['kd_kursus']; ?>"><?=$fKursus['nama_kursus']; ?></option>
                     <?php } ?>
                 </select>
-            </div>
-            <div class="form-group">
-                <label>Harga / jam</label>
-                <input type="number" class="form-control" id="txtHarga">
             </div>
             <div class="form-group">
                 <label>Latar Belakang (Untuk mempromokan diri anda)</label>
@@ -91,6 +89,9 @@ $qTentor = $link -> query("SELECT * FROM tbl_tentor WHERE username='$usernameLog
 
 <script>
 
+var rToProsesTambahTentor = server + "main_app/guru/proses-tambah-tentoring.php";
+var rToHapusTentor = server + "main_app/guru/proses-hapus-tentoring.php";
+
 var mentoring = new Vue({
     el : '#divTentoring',
     data : {
@@ -107,16 +108,30 @@ var mentoring = new Vue({
         {
             let tempat = document.querySelector("#txtTempat").value;
             let kursus = document.querySelector("#txtKursus").value;
-            let harga = document.querySelector("#txtHarga").value;
             let latarBelakang = document.querySelector("#txtLatarBelakang").value;
             let daerah = document.querySelector("#pac-input").value;
-            let ds = {'tempat':tempat, 'kursus':kursus, 'harga':harga, 'latarBelakang':latarBelakang, 'daerah':daerah}
+            let ds = {'tempat':tempat, 'kursus':kursus, 'latarBelakang':latarBelakang, 'daerah':daerah}
             console.log(ds);
-            $.post('proses-tambah-tentoring.php', ds, function(data){
+            $.post(rToProsesTambahTentor, ds, function(data){
                 pesanUmumApp('success', 'Sukses', 'Berhasil mendaftarkan tentor ...');
                 divMain.titleApps = "Tentoring Saya";
                 renderMenu('tentoring-saya.php');
             });
+        },
+        hapusAtc : function(kdTentor)
+        {
+            let konfirmasi = window.confirm("Yakin menghapus tentoring? ...");
+            if(konfirmasi === true){
+                let ds = {'kdTentor':kdTentor}
+                $.post(rToHapusTentor, ds, function(data){
+                    
+                });
+                pesanUmumApp('success', 'Sukses', 'Berhasil menghapus tentor ...');
+                divMain.titleApps = "Tentoring Saya";
+                renderMenu('tentoring-saya.php');
+            }else{
+
+            }
         }
     }
 });
