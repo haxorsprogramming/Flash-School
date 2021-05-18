@@ -66,8 +66,9 @@ $qPesanan = $link->query("SELECT * FROM tbl_pemesanan WHERE kd_siswa='$usernameL
                         <th>Kd Pemesanan</th>
                         <th>Tentor</th>
                         <th>Kursus</th>
+                        <th>Paket</th>
                         <th>Total Harga</th>
-                        <th>Status Pembayaran</th>
+                        <th>Status</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -90,15 +91,34 @@ $qPesanan = $link->query("SELECT * FROM tbl_pemesanan WHERE kd_siswa='$usernameL
                         $qKursus = $link->query("SELECT * FROM tbl_kursus WHERE kd_kursus='$kdKursus';");
                         $fKursus = $qKursus->fetch_assoc();
                         $namaKursus = $fKursus['nama_kursus'];
+                        // cari harga dari paket 
+                        $kdPaket = $fPesanan['kd_paket'];
+                        $qPaket = $link -> query("SELECT * FROM tbl_paket WHERE kd_paket='$kdPaket' LIMIT 0,1;");
+                        $fPaket = $qPaket -> fetch_assoc();
+                        $hargaPaket = $fPaket['harga'];
+                        $namaPaket = $fPaket['nama_paket'];
+                        //status pemesanan 
+                        $statusMentoring = $fPesanan['status_pembayaran'];
+                        if($statusMentoring == 'pending'){
+                            $capStatus = "Menunggu konfirmasi tentor";
+                        }else{
+
+                        }
                         ?>
                         <tr>
                             <td><?=$fPesanan['kd_pemesanan']; ?><br/><?= $fPesanan['waktu_pemesanan']; ?></td>
                             <td><?=$namaTentor; ?></td>
                             <td><?=$namaKursus; ?></td>
-                            <td>Rp. <?=number_format($fPesanan['total_biaya']); ?></td>
-                            <td><?=$fPesanan['status_pembayaran']; ?></td>
+                            <td><?=$namaPaket; ?></td>
+                            <td>Rp. <?=number_format($hargaPaket); ?></td>
+                            <td><?=$capStatus; ?></td>
                             <td>
-                                <a href="detail-pesanan.php?kd_pesanan=<?=$kdPesanan; ?>" class="btn btn-primary">Detail</a>
+                                <?php if($statusMentoring == 'pending'){ ?>
+                                
+                                <?php }else{ ?>
+                                    <a href="detail-pesanan.php?kd_pesanan=<?=$kdPesanan; ?>" class="btn btn-primary">Detail</a>
+                                <?php } ?>
+                                
                             </td>
                         </tr>
                     <?php } ?>

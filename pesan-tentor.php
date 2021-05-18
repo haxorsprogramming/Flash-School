@@ -223,7 +223,22 @@ $qPaket = $link -> query("SELECT * FROM tbl_paket;");
                     let kdPaket = exPaket[0];
                     let ds = {'kdTentor':kdTentor, 'kdPaket':kdPaket}
                     $.post(rToBuatPraPesanan, ds, function(data){
-                        
+                        let obj = JSON.parse(data);
+                        let kdPemesanan = obj.kd_pemesanan;
+                        let kdTentor = obj.kd_tentor;
+                        //save to item pesanan 
+                        var i;
+                        for(i = 0; i < dataJam.length; i++){
+                            let ds = {'kdPesanan':kdPemesanan, 'kdJadwal':dataJam[i], 'kdTentor':kdTentor}
+                            $.post(rToUpdatePesanan, ds, function(data){
+                                let obj = JSON.parse(data);
+                                console.log(obj);
+                            });
+                        }
+                        pesanUmumApp('success', 'Sukses', 'Sukses melakukan pemesanan tentor ... Silahkan lakukan pembayaran di halaman berikutnya');
+                        setTimeout(function(){
+                            window.location.assign('pesanan-saya.php');
+                        }, 3000);
                     });
                 }
             });
