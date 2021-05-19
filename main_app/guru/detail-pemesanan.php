@@ -14,7 +14,6 @@ $qTentor = $link->query("SELECT * FROM tbl_tentor WHERE kd_tentor='$kdTentor' LI
 $fTentor = $qTentor->fetch_assoc();
 $usernameTentor = $fTentor['username'];
 $kdKursus = $fTentor['kd_kursus'];
-$hargaPerJam = $fTentor['harga'];
 // query guru 
 $qGuru = $link->query("SELECT * FROM tbl_guru WHERE username='$usernameTentor' LIMIT 0,1;");
 $fGuru = $qGuru->fetch_assoc();
@@ -25,7 +24,7 @@ $fKursus = $qKursus->fetch_assoc();
 $namaKursus = $fKursus['nama_kursus'];
 
 // total jam 
-$totalJam = $fPesan['total_biaya'] / $hargaPerJam;
+
 ?>
 <div class="container" id="divDetailPemesanan">
     <div style="margin-top:40px;text-align:left;">
@@ -43,22 +42,6 @@ $totalJam = $fPesan['total_biaya'] / $hargaPerJam;
             <tr>
                 <td>Kursus</td>
                 <td><?= $namaKursus; ?></td>
-            </tr>
-            <tr>
-                <td>Harga per Jam</td>
-                <td>Rp. <?= number_format($hargaPerJam); ?></td>
-            </tr>
-            <tr>
-                <td>Total Jam - Total Harga</td>
-                <td><?= $totalJam; ?> - Rp. <?= number_format($fPesan['total_biaya']); ?></td>
-            </tr>
-            <tr>
-                <td>Bukti Pembayaran</td>
-                <td>
-                    <img src="../../file/bukti_pembayaran/<?= $kdPemesanan; ?>.png" id="txtFoto" style="width: 200px;">
-                    <br />
-                    <small>Upload bukti pembayaran</small>
-                </td>
             </tr>
             <tr>
                 <td>Detail waktu mentoring</td>
@@ -90,8 +73,8 @@ $totalJam = $fPesan['total_biaya'] / $hargaPerJam;
         </td>
         </tr>
         <tr>
-            <td>Status pembayaran</td>
-            <td><?=$statusPemesanan; ?></td>
+            <td>Status</td>
+            <td>Menunggu anda terima</td>
         </tr>
         </table>
         Aksi 
@@ -100,9 +83,9 @@ $totalJam = $fPesan['total_biaya'] / $hargaPerJam;
             <a href="#!" class="btn btn-primary" @click="selesaiAtc()">Selesai mentoring</a>
         <?php }elseif($statusMentoring == 'pending'){ ?>
             <?php if($statusPemesanan == 'pending'){ ?>
-            
-            <?php }else{ ?>
                 <a href="#!" class="btn btn-primary" @click="terimaPesananAtc()">Terima pesanan</a>
+            <?php }else{ ?>
+                
             <?php } ?>
             
         <?php } ?>

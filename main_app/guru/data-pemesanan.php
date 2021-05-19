@@ -18,11 +18,9 @@ $usernameLogin = $_SESSION['user_login'];
                         <th>Kd Pemesanan</th>
                         <th>Siswa Pemesan</th>
                         <th>Mentor - Kursus</th>
-                        <th>Total Jam</th>
-                        <th>Total harga</th>
                         <th>Waktu Pemesanan</th>
+                        <th>Status</th>
                         <th>Status Pembayaran</th>
-                        <th>Status Mentoring</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -32,7 +30,7 @@ $usernameLogin = $_SESSION['user_login'];
                     $kdPemesanan = $fPemesanan['kd_pemesanan'];
                     $kdSiswa = $fPemesanan['kd_siswa'];
                     $kdTentor = $fPemesanan['kd_tentor'];
-                    $totalBiaya = $fPemesanan['total_biaya'];
+                    
                     $waktuPemesanan = $fPemesanan['waktu_pemesanan'];
                     $statusPembayaran = $fPemesanan['status_pembayaran'];
                     $statusMentoring = $fPemesanan['status_mentoring'];
@@ -45,8 +43,7 @@ $usernameLogin = $_SESSION['user_login'];
                     $fTentor = $qMentor -> fetch_assoc();
                     $usernameMentor = $fTentor['username'];
                     $kdKursus = $fTentor['kd_kursus'];
-                    $harga = $fTentor['harga'];
-                    $totalJam = $totalBiaya / $harga;
+                    
                     // query guru 
                     $qGuru = $link -> query("SELECT * FROM tbl_guru WHERE username='$usernameMentor' LIMIT 0,1;");
                     $fGuru = $qGuru -> fetch_assoc();
@@ -62,11 +59,14 @@ $usernameLogin = $_SESSION['user_login'];
                         <td><?=$kdPemesanan; ?></td>
                         <td><?=$namaSiswa; ?></td>
                         <td><?=$namaGuru; ?> - <?=$namaKursus; ?></td>
-                        <td><?=$totalJam; ?></td>
-                        <td>Rp. <?=number_format($totalBiaya); ?></td>
                         <td><?=$waktuPemesanan; ?></td>
+                        <?php if($statusMentoring == 'pending'){ ?>
+                            <td>Menunggu anda terima</td>
+                        <?php }else{ ?>
+                            
+                        <?php } ?>
+                        
                         <td><?=$statusPembayaran; ?></td>
-                        <td><?=$statusMentoring; ?></td>
                         <td>
                             <a href="#!" class="btn btn-primary" @click="detailAtc('<?=$kdPemesanan; ?>')">Detail</a>
                         </td>
