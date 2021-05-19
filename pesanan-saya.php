@@ -98,11 +98,11 @@ $qPesanan = $link->query("SELECT * FROM tbl_pemesanan WHERE kd_siswa='$usernameL
                         $hargaPaket = $fPaket['harga'];
                         $namaPaket = $fPaket['nama_paket'];
                         //status pemesanan 
-                        $statusMentoring = $fPesanan['status_pembayaran'];
+                        $statusMentoring = $fPesanan['status_mentoring'];
                         if($statusMentoring == 'pending'){
                             $capStatus = "Menunggu konfirmasi tentor";
-                        }else{
-
+                        }elseif($statusMentoring == 'waiting_payment'){
+                            $capStatus = "Menunggu pembayaran & verifikasi admin";
                         }
                         ?>
                         <tr>

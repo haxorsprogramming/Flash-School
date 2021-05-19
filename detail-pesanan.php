@@ -8,12 +8,13 @@ $qPemesanan = $link -> query("SELECT * FROM tbl_pemesanan WHERE kd_pemesanan='$k
 $fPesan = $qPemesanan -> fetch_assoc();
 $kdTentor = $fPesan['kd_tentor'];
 $statusPemesanan = $fPesan['status_pembayaran'];
+$kdPaket = $fPesan['kd_paket'];
 // query tentor 
 $qTentor = $link -> query("SELECT * FROM tbl_tentor WHERE kd_tentor='$kdTentor' LIMIT 0,1;");
 $fTentor = $qTentor -> fetch_assoc();
 $usernameTentor = $fTentor['username'];
 $kdKursus = $fTentor['kd_kursus'];
-$hargaPerJam = $fTentor['harga'];
+
 // query guru 
 $qGuru = $link -> query("SELECT * FROM tbl_guru WHERE username='$usernameTentor' LIMIT 0,1;");
 $fGuru = $qGuru -> fetch_assoc();
@@ -22,9 +23,14 @@ $namaGuru = $fGuru['nama_lengkap'];
 $qKursus = $link -> query("SELECT * FROM tbl_kursus WHERE kd_kursus='$kdKursus';");
 $fKursus = $qKursus -> fetch_assoc();
 $namaKursus = $fKursus['nama_kursus'];
-
-// total jam 
-$totalJam = $fPesan['total_biaya'] / $hargaPerJam;
+// detail paket 
+$qPaket = $link -> query("SELECT * FROM tbl_paket WHERE kd_paket='$kdPaket';");
+$fPaket = $qPaket -> fetch_assoc();
+$harga = $fPaket['harga'];
+// setting bimbel 
+$qSetting = $link -> query("SELECT * FROM tbl_setting_bimbel WHERE kd_setting='REKENING' LIMIT 0,1;");
+$fSetting = $qSetting -> fetch_assoc();
+$rekening = $fSetting['nilai'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -91,12 +97,7 @@ $totalJam = $fPesan['total_biaya'] / $hargaPerJam;
             <tr>
             <td>Kursus</td><td><?=$namaKursus; ?></td>
             </tr>
-            <tr>
-            <td>Harga per Jam</td><td>Rp. <?=number_format($hargaPerJam); ?></td>
-            </tr>
-            <tr>
-            <td>Total Jam - Total Harga</td><td><?=$totalJam ; ?> - Rp. <?=number_format($fPesan['total_biaya']); ?></td>
-            </tr>
+            
             <tr>
             <td>Bukti Pembayaran</td>
             <td>
@@ -141,7 +142,7 @@ $totalJam = $fPesan['total_biaya'] / $hargaPerJam;
             <a href="#!" class="btn btn-primary" onclick="simpanAtc()">Simpan</a>
             <hr/>
             <h6>Informasi pembayaran</h6>
-            <p>Silahkan lakukan pembayaran sebesar <b>Rp. <?=number_format($fPesan['total_biaya']); ?></b>, ke rekening BRI 8922-2122-122 an Flash School</p>
+            <p>Silahkan lakukan pembayaran sebesar <b>Rp. <?=number_format($harga); ?></b>, ke rekening <?=$rekening; ?></p>
         </div>
     </div>
 
