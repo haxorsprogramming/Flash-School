@@ -39,7 +39,7 @@ $rekening = getOneData("REKENING");
                         <div class="col-lg-4 mx-auto">
                             <div class="auth-form-light text-left py-5 px-4 px-sm-5" id="daftar-app">
                                 <div class="brand-logo" style='text-align:center;'>
-                                    <img src="./img/logo.png" alt="logo" style="width:150px;">
+                                    <img src="<?=$base_url; ?>img/logo.png" alt="logo" style="width:150px;">
                                     <h3 style="font-weight:bold;margin-top:40px;">Flash School - Registrasi User</h3>
                                 </div>
                                 <div style="text-align:center;" id="divFormPendaftaran">
@@ -85,7 +85,7 @@ $rekening = getOneData("REKENING");
                                 </div>
                                 <div id="divSucessDaftarSiswa" style="margin-top:30px;text-align:center;display:none;">
                                     <h2 class="font-weight-light">Pendaftaran Sukses</h2>
-                                    <img src="./img/success-registrasi.png" style="width: 400px;">
+                                    <img src="<?=$base_url; ?>img/success-registrasi.png" style="width: 400px;">
                                     <br /><br />
                                     <p>Silahkan lakukan pembayaran biaya pendaftaran sebesar Rp. <?=number_format($biaya); ?>, ke nomor
                                         rekening <?=$rekening; ?>, kemudian lakukan konfirmasi pembayaran pada saat masuk ke aplikasi. Terima kasih</p>
@@ -102,7 +102,7 @@ $rekening = getOneData("REKENING");
                                 </div>
                                 <div id="divSucessDaftarGuru" style="margin-top:30px;text-align:center;display:none;">
                                     <h2 class="font-weight-light">Pendaftaran Sukses</h2>
-                                    <img src="./img/success-registrasi.png" style="width: 400px;">
+                                    <img src="<?=$base_url; ?>img/success-registrasi.png" style="width: 400px;">
                                     <br /><br />
                                     <p>Terima kasih telah mendaftar calon mentor. Silahkan masuk ke akun anda dan lengkapi data diri sebelum menerima pesanan mentoring, terima kasih</p>
                                     <div class="mt-5 text-muted text-center">
@@ -137,7 +137,7 @@ $rekening = getOneData("REKENING");
             <script src="ladun/js/template.js"></script>
             <!-- endinject -->
             <script>
-                const server = "http://localhost/bimbelku/";
+                const server = "<?=$base_url; ?>";
             </script>
             <script src="ladun/daftar/daftar.js"></script>
 </body>
