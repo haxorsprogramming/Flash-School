@@ -16,7 +16,7 @@ if($nama == "-"){ ?>
 <div class="container" style="margin-bottom:20px;">
   <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-12">
-        <img src="../../ladun/dasbor/img/cover.jpg" style="width:100%;" >
+        <img src="<?=$base_url; ?>/ladun/dasbor/img/cover.jpg" style="width:100%;" >
     </div>
   </div>
 </div>

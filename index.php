@@ -1,4 +1,5 @@
 <?php
+include("config/db.php");
 include("header.php");
 if(isset($_SESSION['user_login'])){
   $statusLogin = TRUE;
@@ -144,7 +145,7 @@ if(isset($_SESSION['user_login'])){
   <div class="container">
     <div class="row">
       <div class="col-lg-6">
-        <img src="img/workingspace.png" alt="Workingspace" class="img-fluid">
+        <img src="<?=$base_url; ?>img/workingspace.png" alt="Workingspace" class="img-fluid">
       </div>
       <div class="col-md-6 col-sm-6">
         <h3 class="text-center">FASILITAS</h3><br>
@@ -155,7 +156,12 @@ if(isset($_SESSION['user_login'])){
         <h4 class="fasilitas">- Free konsultan</h4>
         <h4 class="fasilitas">- Biaya Terjangkau</h4> <br>
         <h2 class="fasilitas">Biaya Pendaftaran</h2>
-        <h2 class="fasilitas harga">Rp. 75.000</h2>
+        <?php 
+          $qSetting = $link -> query("SELECT * FROM tbl_setting_bimbel WHERE kd_setting='BIAYA_REGISTRASI' LIMIT 0,1;");
+          $fSetting = $qSetting -> fetch_assoc();
+          $biaya = $fSetting['nilai'];
+        ?>
+        <h2 class="fasilitas harga">Rp. <?=number_format($biaya); ?></h2>
 
       </div>
 
@@ -175,7 +181,23 @@ if(isset($_SESSION['user_login'])){
           <hr class="bottom-line">
         </div>
         <div class="text-center">
-          <img src="img/harga.jpeg" alt="">
+        <table class="table">
+        <tr>
+              <th>Nama Paket</th> <th>Ketarangan</th> <th>Jenjang</th> <th>Harga</th> <th>Pertemuan</th>
+        </tr>
+        <?php 
+            $qPaket = $link -> query("SELECT * FROM tbl_paket;");
+            while($fPaket = $qPaket -> fetch_assoc()){ ?>
+              <tr>
+              <td><?=$fPaket['nama_paket']; ?></td>
+              <td><?=$fPaket['keterangan']; ?></td>
+              <td><?=$fPaket['jenjang']; ?></td>
+              <td>Rp. <?=number_format($fPaket['harga']); ?></td>
+              <td><?=$fPaket['pertemuan']; ?></td>
+              </tr>
+            <?php }?>
+        </table>
+         
         </div>
       </div>
     </div>
