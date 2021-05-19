@@ -16,8 +16,7 @@ $qPemesanan = $link -> query("SELECT * FROM tbl_pemesanan;");
                         <th>Kd Pemesanan</th>
                         <th>Siswa Pemesan</th>
                         <th>Mentor - Kursus</th>
-                        <th>Total Jam</th>
-                        <th>Total harga</th>
+                        <th>Paket</th>
                         <th>Waktu Pemesanan</th>
                         <th>Status Pembayaran</th>
                         <th>Aksi</th>
@@ -29,7 +28,7 @@ $qPemesanan = $link -> query("SELECT * FROM tbl_pemesanan;");
                     $kdPemesanan = $fPemesanan['kd_pemesanan'];
                     $kdSiswa = $fPemesanan['kd_siswa'];
                     $kdTentor = $fPemesanan['kd_tentor'];
-                    $totalBiaya = $fPemesanan['total_biaya'];
+                    
                     $waktuPemesanan = $fPemesanan['waktu_pemesanan'];
                     $statusPembayaran = $fPemesanan['status_pembayaran'];
                     // query siswa 
@@ -41,8 +40,7 @@ $qPemesanan = $link -> query("SELECT * FROM tbl_pemesanan;");
                     $fTentor = $qMentor -> fetch_assoc();
                     $usernameMentor = $fTentor['username'];
                     $kdKursus = $fTentor['kd_kursus'];
-                    $harga = $fTentor['harga'];
-                    $totalJam = $totalBiaya / $harga;
+                    
                     // query guru 
                     $qGuru = $link -> query("SELECT * FROM tbl_guru WHERE username='$usernameMentor' LIMIT 0,1;");
                     $fGuru = $qGuru -> fetch_assoc();
@@ -51,13 +49,18 @@ $qPemesanan = $link -> query("SELECT * FROM tbl_pemesanan;");
                     $qKursus = $link->query("SELECT * FROM tbl_kursus WHERE kd_kursus='$kdKursus';");
                     $fKursus = $qKursus->fetch_assoc();
                     $namaKursus = $fKursus['nama_kursus'];
+                    // paket 
+                    $kdPaket = $fPemesanan['kd_paket'];
+                    $qPaket = $link -> query("SELECT * FROM tbl_paket WHERE kd_paket='$kdPaket';");
+                    $fPaket = $qPaket -> fetch_assoc();
+                    $namaPaket = $fPaket['nama_paket'];
+                    $harga = $fPaket['harga'];
                 ?>
                 <tr>
                     <td><?=$kdPemesanan; ?></td>
                     <td><?=$namaSiswa; ?></td>
                     <td><?=$namaGuru; ?> - <?=$namaKursus; ?></td>
-                    <td><?=$totalJam; ?></td>
-                    <td>Rp. <?=number_format($totalBiaya); ?></td>
+                    <td><?=$namaPaket; ?><br/>(Rp. <?=number_format($harga); ?>)</td>
                     <td><?=$waktuPemesanan; ?></td>
                     <td><?=$statusPembayaran; ?></td>
                     <td>

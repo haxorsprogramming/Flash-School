@@ -13,7 +13,7 @@ $qTentor = $link->query("SELECT * FROM tbl_tentor WHERE kd_tentor='$kdTentor' LI
 $fTentor = $qTentor->fetch_assoc();
 $usernameTentor = $fTentor['username'];
 $kdKursus = $fTentor['kd_kursus'];
-$hargaPerJam = $fTentor['harga'];
+
 // query guru 
 $qGuru = $link->query("SELECT * FROM tbl_guru WHERE username='$usernameTentor' LIMIT 0,1;");
 $fGuru = $qGuru->fetch_assoc();
@@ -23,8 +23,13 @@ $qKursus = $link->query("SELECT * FROM tbl_kursus WHERE kd_kursus='$kdKursus';")
 $fKursus = $qKursus->fetch_assoc();
 $namaKursus = $fKursus['nama_kursus'];
 
-// total jam 
-$totalJam = $fPesan['total_biaya'] / $hargaPerJam;
+// paket 
+$kdPaket = $fPesan['kd_paket'];
+$qPaket = $link -> query("SELECT * FROM tbl_paket WHERE kd_paket='$kdPaket';");
+$fPaket = $qPaket -> fetch_assoc();
+$namaPaket = $fPaket['nama_paket'];
+$harga = $fPaket['harga'];
+
 ?>
 <div class="container" id="divDetailPemesanan">
     <div style="margin-top:40px;text-align:left;">
@@ -44,12 +49,8 @@ $totalJam = $fPesan['total_biaya'] / $hargaPerJam;
                 <td><?= $namaKursus; ?></td>
             </tr>
             <tr>
-                <td>Harga per Jam</td>
-                <td>Rp. <?= number_format($hargaPerJam); ?></td>
-            </tr>
-            <tr>
-                <td>Total Jam - Total Harga</td>
-                <td><?= $totalJam; ?> - Rp. <?= number_format($fPesan['total_biaya']); ?></td>
+                <td>Paket</td>
+                <td><?= $namaPaket; ?> - Harga paket : Rp. <?=number_format($harga); ?></td>
             </tr>
             <tr>
                 <td>Bukti Pembayaran</td>

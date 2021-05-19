@@ -64,8 +64,12 @@ $usernameLogin = $_SESSION['user_login'];
                             <td>Menunggu anda terima</td>
                         <?php }elseif($statusMentoring == 'waiting_payment'){ ?>
                             <td>Menunggu pembayaran</td>
+                        <?php }elseif($statusMentoring == 'active'){ ?>
+                            <td>Aktif</td>
+                        <?php }else{ ?>
+                            <td>Selesai</td>
                         <?php } ?>
-                        
+                            
                         <td><?=$statusPembayaran; ?></td>
                         <td>
                             <a href="#!" class="btn btn-primary" @click="detailAtc('<?=$kdPemesanan; ?>')">Detail</a>

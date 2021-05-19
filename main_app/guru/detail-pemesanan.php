@@ -78,13 +78,21 @@ $namaKursus = $fKursus['nama_kursus'];
                <td>Menunggu anda terima</td>
             <?php }elseif($statusMentoring === 'waiting_payment'){ ?>
                 <td>Menunggu pembayaran siswa</td>
+            <?php }elseif($statusMentoring === 'active'){?>
+                <td>Aktif</td>
+            <?php }else{ ?>
+                <td>Selesai</td>
             <?php } ?>
         </tr>
         </table>
         <h5>Aksi</h5><br/>
         <?php if($statusMentoring === 'pending'){?>
             <a href="#!" class="btn btn-primary" @click="terimaPesananTentorAtc('<?=$kdPemesanan; ?>')">Terima pesanan</a>
-        <?php }else { ?>
+        <?php }elseif($statusMentoring === 'waiting_payment'){ ?>
+                
+        <?php }elseif($statusMentoring === 'active'){?>
+            <a href="#!" class="btn btn-primary" @click="selesaiAtc('<?=$kdPemesanan; ?>')">Set selesai</a>
+        <?php }else{ ?> 
         
         <?php } ?>
 
