@@ -17,7 +17,6 @@ include('../config/db.php');
                         <th>Tempat / Tanggal Lahir</th>
                         <th>Alamat</th>
                         <th>HP</th>
-                        <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -31,7 +30,6 @@ include('../config/db.php');
                             <td><?=$fGuru['tempat_lahir']; ?> / <?=$fGuru['tanggal_lahir']; ?></td>
                             <td><?=$fGuru['alamat']; ?></td>
                             <td><?=$fGuru['no_hp']; ?></td>
-                            <td><a href="#!" class="btn btn-warning">Hapus</a></td>
                         </tr>
                     <?php } ?>
                 </tbody>

@@ -74,7 +74,7 @@ include('../config/db.php');
             <li class="dropdown">
               <a href="#!" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-newspaper"></i> <span>Data Master</span></a>
               <ul class="dropdown-menu">
-                <li><a class="nav-link" href="#!">Siswa</a></li>
+                <li><a @click="siswaAtc()" class="nav-link" href="#!">Siswa</a></li>
                 <li><a @click="guruAtc()" class="nav-link" href="#!">Guru</a></li>
                 <li><a @click="kursusAtc()" class="nav-link" href="#!">Kursus</a></li>
                 <li><a @click="paketKursusAtc()" class="nav-link" href="#!">Paket Kursus</a></li>

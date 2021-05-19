@@ -48,6 +48,11 @@ var divMenu = new Vue({
         {
             divMain.titleApps = "Paket Kursus";
             renderMenu('paket-kursus.php');
+        },
+        siswaAtc : function()
+        {
+            divMain.titleApps = "Data Siswa";
+            renderMenu('siswa.php');
         }
     }
 });

@@ -103,6 +103,10 @@ $qPesanan = $link->query("SELECT * FROM tbl_pemesanan WHERE kd_siswa='$usernameL
                             $capStatus = "Menunggu konfirmasi tentor";
                         }elseif($statusMentoring == 'waiting_payment'){
                             $capStatus = "Menunggu pembayaran & verifikasi admin";
+                        }elseif($statusMentoring == 'active'){
+                            $capStatus = "Aktif";
+                        }else{
+                            $capStatus = "Selesai";
                         }
                         ?>
                         <tr>
@@ -115,6 +119,8 @@ $qPesanan = $link->query("SELECT * FROM tbl_pemesanan WHERE kd_siswa='$usernameL
                             <td>
                                 <?php if($statusMentoring == 'pending'){ ?>
                                 
+                                <?php }elseif($statusMentoring == 'active'){ ?>
+                                    
                                 <?php }else{ ?>
                                     <a href="detail-pesanan.php?kd_pesanan=<?=$kdPesanan; ?>" class="btn btn-primary">Detail</a>
                                 <?php } ?>
