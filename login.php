@@ -1,3 +1,6 @@
+<?php 
+include('config/db.php');
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -24,7 +27,7 @@
                         <div class="col-lg-4 mx-auto">
                             <div class="auth-form-light text-left py-5 px-4 px-sm-5" id="login-app">
                                 <div class="brand-logo" style='text-align:center;'>
-                                    <img src="http://localhost/bimbelku/img/logo.png" alt="logo" style='width:150px; '>
+                                    <img src="<?=$base_url; ?>img/logo.png" alt="logo" style='width:150px; '>
                                     <h3 style="font-weight:bold;margin-top:40px;">Flash School - Login</h3>
                                 </div>
                                 <div style='text-align:center;'>
@@ -80,7 +83,7 @@
             <script src="ladun/js/template.js"></script>
             <!-- endinject -->
             <script>
-                const server = "http://localhost/bimbelku/";
+                const server = "<?=$base_url; ?>";
             </script>
             <script src="ladun/login/login.js"></script>
 </body>
