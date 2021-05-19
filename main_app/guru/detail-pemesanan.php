@@ -74,28 +74,26 @@ $namaKursus = $fKursus['nama_kursus'];
         </tr>
         <tr>
             <td>Status</td>
-            <td>Menunggu anda terima</td>
+            <?php if($statusMentoring === 'pending'){?>
+               <td>Menunggu anda terima</td>
+            <?php }elseif($statusMentoring === 'waiting_payment'){ ?>
+                <td>Menunggu pembayaran siswa</td>
+            <?php } ?>
         </tr>
         </table>
-        Aksi 
-        <hr/>
-        <?php if($statusMentoring == 'aktif'){ ?>
-            <a href="#!" class="btn btn-primary" @click="selesaiAtc()">Selesai mentoring</a>
-        <?php }elseif($statusMentoring == 'pending'){ ?>
-            <?php if($statusPemesanan == 'pending'){ ?>
-                <a href="#!" class="btn btn-primary" @click="terimaPesananAtc()">Terima pesanan</a>
-            <?php }else{ ?>
-                
-            <?php } ?>
-            
-        <?php } ?>
+        <h5>Aksi</h5><br/>
+        <?php if($statusMentoring === 'pending'){?>
+            <a href="#!" class="btn btn-primary" @click="terimaPesananTentorAtc('<?=$kdPemesanan; ?>')">Terima pesanan</a>
+        <?php }else { ?>
         
-        <hr />
+        <?php } ?>
 
     </div>
 </div>
 
 <script>
+
+var rToTerimaPesanan = "<?=$base_url;?>main_app/guru/terima-pesanan-awal.php";
 
 var divDetailPemesanan = new Vue({
     el : '#divDetailPemesanan',
@@ -152,6 +150,21 @@ var divDetailPemesanan = new Vue({
                 }
             });
 
+        },
+        terimaPesananTentorAtc : function(kdPemesanan)
+        {
+            let ds = {'kdPesanan':kdPemesanan}
+            let konfirmasi = window.confirm("Terima pesanan ini? ... ");
+            if(konfirmasi === true){
+                $.post(rToTerimaPesanan, ds, function(data){
+                    pesanUmumApp('success', 'Sukses', 'Berhasil menerima pesanan, silahkan tunggu pembayaran dari siswa ...');
+                    divMain.titleApps = "Data pemesanan";
+                    renderMenu('data-pemesanan.php');
+                });
+            }else{
+
+            }
+            
         }
     }
 });

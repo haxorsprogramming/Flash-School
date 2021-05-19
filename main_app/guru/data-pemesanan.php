@@ -62,8 +62,8 @@ $usernameLogin = $_SESSION['user_login'];
                         <td><?=$waktuPemesanan; ?></td>
                         <?php if($statusMentoring == 'pending'){ ?>
                             <td>Menunggu anda terima</td>
-                        <?php }else{ ?>
-                            
+                        <?php }elseif($statusMentoring == 'waiting_payment'){ ?>
+                            <td>Menunggu pembayaran</td>
                         <?php } ?>
                         
                         <td><?=$statusPembayaran; ?></td>
